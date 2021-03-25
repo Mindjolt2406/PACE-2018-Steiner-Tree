@@ -34,7 +34,9 @@ class NiceTreeNode {
     public: 
     static int classNodeID;
     static vector<string> niceNodeTypeArr;
+    static vector<vector<int> >  adjGraph;
     
+    NiceTreeNode* parent;
     vector<NiceTreeNode*> children;
     vector<int> bag;
     NiceNodeType niceNodeType = NiceNodeType::NONE;
@@ -61,6 +63,7 @@ class NiceTreeNode {
 
     void static dfsNiceTreeNodes(NiceTreeNode* niceTreeNode, int offsetNum = 0);
 
+    void setParent(NiceTreeNode* parent);
 }; 
 
 #endif

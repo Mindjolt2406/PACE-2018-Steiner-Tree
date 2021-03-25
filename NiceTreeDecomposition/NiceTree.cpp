@@ -16,6 +16,7 @@ void NiceTreeNode::generateNodesLeaf() {
     childBag.pop_back();
     NiceTreeNode* childNode = new NiceTreeNode(childBag);
     children.push_back(childNode);
+    childNode -> setParent(this);
     childNode -> generateNodesLeaf();
 }
 
@@ -55,6 +56,8 @@ void NiceTreeNode::generateNodes(vector<NiceTreeNode*> &futureChildren) {
         leftFutureChildren.push_back(futureChildren.back());
         rightFutureChildren = futureChildren;
         rightFutureChildren.pop_back();
+        leftJoinNode -> setParent(this);
+        rightJoinNode -> setParent(this);
         leftJoinNode -> generateNodes(leftFutureChildren);
         rightJoinNode -> generateNodes(rightFutureChildren);
     }
@@ -66,6 +69,7 @@ vector<int> &forgetNodes, NiceTreeNode* destNode) {
     // Introduce nodes are introduced by going from child -> parent and hence have one less vertex than the parent
     if(introduceNodes.size() + forgetNodes.size() == 1) {
         children.push_back(destNode);
+        destNode -> setParent(this);
         this -> niceNodeType = (introduceNodes.size() == 1) ? NiceNodeType::VERTEX : NiceNodeType::FORGET;
     } else {
         if(!introduceNodes.empty()) {
@@ -76,6 +80,7 @@ vector<int> &forgetNodes, NiceTreeNode* destNode) {
             childBag.erase(remove(childBag.begin(), childBag.end(), introduceNode), childBag.end());
             NiceTreeNode* childNode = new NiceTreeNode(childBag);
             this -> children.push_back(childNode);
+            childNode -> setParent(this);
             childNode -> generateIFNodes(introduceNodes, forgetNodes, destNode);
         } else if(!forgetNodes.empty()) {
             this -> niceNodeType = NiceNodeType::FORGET;
@@ -85,6 +90,7 @@ vector<int> &forgetNodes, NiceTreeNode* destNode) {
             childBag.push_back(forgetNode);
             NiceTreeNode* childNode = new NiceTreeNode(childBag);
             this -> children.push_back(childNode);
+            childNode -> setParent(this);
             childNode -> generateIFNodes(introduceNodes, forgetNodes, destNode);
         }
     }
@@ -158,6 +164,7 @@ void NiceTreeNode::dfsNiceTreeNodes(NiceTreeNode* niceTreeNode, int offsetNum) {
     string offset(offsetNum, '-');
     if(offsetNum) offset += "  ";
     cerr << offset; t(niceTreeNode -> nodeID);
+    if(niceTreeNode -> parent) {cerr << offset; t(niceTreeNode -> parent -> nodeID);}
     cerr << offset; cerr << "niceNodeType: " << niceNodeTypeArr[(int)niceTreeNode -> niceNodeType] << endl;
     cerr << offset; t(niceTreeNode -> children);
     cerr << offset; t(niceTreeNode -> bag);
@@ -168,7 +175,11 @@ void NiceTreeNode::dfsNiceTreeNodes(NiceTreeNode* niceTreeNode, int offsetNum) {
     }
 }
 
- ostream& operator <<(ostream &os, NiceTreeNode* niceTreeNode) {
+void NiceTreeNode::setParent(NiceTreeNode* parentNode) {
+    this -> parent = parentNode;
+}
+
+ostream& operator <<(ostream &os, NiceTreeNode* niceTreeNode) {
     os << (int)niceTreeNode -> nodeID;
     return os;
 }
