@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
-#include "NiceTree.h"
+#include "NiceTree.hpp"
 
 // Change to consider adding edges as well
 NiceTreeNode::NiceTreeNode(vector<int> &bag) : nodeID(NiceTreeNode::classNodeID++) {
@@ -94,6 +94,7 @@ void NiceTreeNode::setNiceNodeType(NiceNodeType niceNodeType) {
     this -> niceNodeType = niceNodeType;
 } 
 
+// Reads the treewidth section of the input
 void NiceTreeNode::readInput() {
     string sectionName, treeName, decompositionName, newLine;
     cin >> sectionName >> treeName >> decompositionName;
@@ -173,14 +174,8 @@ void NiceTreeNode::dfsNiceTreeNodes(NiceTreeNode* niceTreeNode, int offsetNum) {
 }
 
 int NiceTreeNode::classNodeID = 0;
-
-int main() {
-    __;
-    // NiceTreeNode::classNodeID = 0;
-    NiceTreeNode::readInput();
-    return 0;
-}
-
+vector<string> NiceTreeNode::niceNodeTypeArr = {"Introduce", "Edge", "Forget", "Join", "None"};
+//
 /*
 SECTION Tree Decomposition
 s td 4 2 5

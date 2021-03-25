@@ -1,3 +1,6 @@
+#ifndef __NICE__TREE_
+#define __NICE__TREE_
+
 #include<bits/stdc++.h>
 #define INF 1e9+1
 // g++ -std=c++17 -Wl,-stack_size -Wl,0x10000000 main.cpp
@@ -13,7 +16,7 @@
 #define __ {ios::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);}
 
 using namespace std;
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+// mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 template<class A, class B> ostream& operator<<(ostream& out, const pair<A, B> &a){ return out<<"("<<a.first<<", "<<a.second<<")";}
 template <int> ostream& operator<<(ostream& os, const vector<int>& v) { os << "["; for (int i = 0; i < v.size(); ++i) { if(v[i]!=INF) os << v[i]; else os << "INF";if (i != v.size() - 1) os << ", "; } os << "]"; return os; } 
 template <typename T> ostream& operator<<(ostream& os, const vector<T>& v) { os << "["; for (int i = 0; i < v.size(); ++i) { os << v[i]; ;if (i != v.size() - 1) os << ", "; } os << "]"; return os; } 
@@ -26,12 +29,12 @@ enum class NiceNodeType {
     NONE // Null nodes
 }; 
 
-vector<string> niceNodeTypeArr = {"Introduce", "Edge", "Forget", "Join", "None"};
-
 // Change to consider adding edges as well
 class NiceTreeNode {
     public: 
     static int classNodeID;
+    static vector<string> niceNodeTypeArr;
+    
     vector<NiceTreeNode*> children;
     vector<int> bag;
     NiceNodeType niceNodeType = NiceNodeType::NONE;
@@ -59,3 +62,5 @@ class NiceTreeNode {
     void static dfsNiceTreeNodes(NiceTreeNode* niceTreeNode, int offsetNum = 0);
 
 }; 
+
+#endif
