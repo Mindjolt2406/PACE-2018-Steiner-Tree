@@ -34,16 +34,30 @@ class NiceTreeNode {
     public: 
     static int classNodeID;
     static vector<string> niceNodeTypeArr;
-    
+    static vector< vector<int> >  adjNodes;
+    static map<int, NiceTreeNode* > highestNodeVertex; 
+
+    const int nodeID;
+    NiceTreeNode* parent;
     vector<NiceTreeNode*> children;
     vector<int> bag;
     NiceNodeType niceNodeType = NiceNodeType::NONE;
-    int nodeID;
+
+    // redundant, only used for introducing edges and comparing depths of vertex ancestors
+    int depthNode; 
+
+    // Edge introduced
+    pair<int, int> edge;
+
+    // Vertex introduced or forgotten
+    int vertex; 
 
     NiceTreeNode(vector<int> &bag);
 
     void generateNodesLeaf();
-
+    
+    // Called only for root with a non zero bag size
+    NiceTreeNode* generateRoot();
 
     void generateDiffNodes(vector<int> &introduceNodes, 
     vector<int> &forgetNodes, NiceTreeNode* destNode);
@@ -53,14 +67,24 @@ class NiceTreeNode {
     void generateIFNodes(vector<int> &introduceNodes, 
     vector<int> &forgetNodes, NiceTreeNode* destNode);
 
+    // Setters
     void setNiceNodeType(NiceNodeType niceNodeType) ;
 
-    void static readInput();
+    void setParent(NiceTreeNode* parent);
+
+    void addIntroduceEdgeNodeForVertex(vector<pair<int, int> > &edgesToAdd);
+
+    void prettyPrintNiceTree(int offsetNum = 0);
+
+    void static readInput(int numNodes);
 
     void static dfsNodes(int currNode, int parentNode, vector<vector<int> > &adj, vector<NiceTreeNode*> &niceTreeNodes);
 
-    void static dfsNiceTreeNodes(NiceTreeNode* niceTreeNode, int offsetNum = 0);
+    void static calculateDepthNodes(NiceTreeNode* currNode, int depth = 0);
 
+    void static addIntroduceEdgeNodes(int numNodes);
+
+    friend ostream& operator<<(ostream &os, NiceNodeType &niceNodeType);
 }; 
 
 #endif
