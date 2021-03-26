@@ -34,13 +34,18 @@ class NiceTreeNode {
     public: 
     static int classNodeID;
     static vector<string> niceNodeTypeArr;
-    static vector<pair<int, int> >  edgeList;
+    static vector< vector<int> >  adjNodes;
+    static map<int, NiceTreeNode* > highestNodeVertex; 
 
     const int nodeID;
     NiceTreeNode* parent;
     vector<NiceTreeNode*> children;
     vector<int> bag;
     NiceNodeType niceNodeType = NiceNodeType::NONE;
+    
+    // redundant, only used for introducing edges and comparing depths of vertex ancestors
+    int depthNode; 
+    vector<pair<int, int> > edgeList;
 
     // Vertex introduced or forgotten
     int vertex; 
@@ -65,9 +70,13 @@ class NiceTreeNode {
 
     void setParent(NiceTreeNode* parent);
 
+    void addIntroduceEdgeNodes();
+
     void static readInput();
 
     void static dfsNodes(int currNode, int parentNode, vector<vector<int> > &adj, vector<NiceTreeNode*> &niceTreeNodes);
+
+    void static calculateDepthNodes(NiceTreeNode* currNode, int depth);
 
     void static dfsNiceTreeNodes(NiceTreeNode* niceTreeNode, int offsetNum = 0);
 }; 

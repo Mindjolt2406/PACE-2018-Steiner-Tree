@@ -200,6 +200,54 @@ NiceTreeNode* NiceTreeNode::generateRoot() {
     return parentNode -> generateRoot();
 }
 
+// Add a node "introducing" the edge just before we forget that vertex. 
+void NiceTreeNode::addIntroduceEdgeNodeForVertex(vector<pair<int, int> > &edgesToAdd) {
+    int parentChildIndex = 0;
+    if(this -> parent -> niceNodeType == NiceNodeType::FORGET) {
+        parentChildIndex = (parent -> children.front() -> nodeID == this -> nodeID) ? 0 : 1;
+    }
+
+    for(auto edge : edgesToAdd) {
+        NiceTreeNode* newEdgeNode = new NiceTreeNode(this -> bag);
+
+        // Handling parent and child pointers for the new node
+        this -> parent -> children[parentChildIndex] = newEdgeNode;
+        newEdgeNode -> parent = this -> parent;
+        newEdgeNode -> children.push_back(this);
+        this -> parent = newEdgeNode;
+        newEdgeNode -> niceNodeType = NiceNodeType::EDGE;
+
+        newEdgeNode -> edgeList = this -> edgeList;
+        newEdgeNode -> edgeList.push_back(edge);
+    }
+}
+
+void static NiceTreeNode::addIntroduceEdgeNodes(int numNodes) {
+    for(int i = 0; i < numNodes; i++) {
+        vector<pair<int, int> > edgesToAdd;
+        int currDepthHighestNodeVertex = highestNodeVertex[i] -> depthNode;
+        for(auto child : adjNodes[i]) {
+            if(highestNodeVertex[child] -> depthNode < currDepthHigestNodeVertex) {
+                edgesToAdd.push_back(make_pair(i, child));
+            }
+        }
+
+        highestNodeVertex[i] -> addIntroduceEdgeNodeForVertex(edgesToAdd);
+    }
+}
+
+void static NiceTreeNode::calculateDepthNodes(NiceTreeNode* currNode, int depth = 0) {
+    currNode -> depthNode = depth;
+
+    if(currNode -> niceNodeType == NiceNodeType :: FORGET) {
+        highestNodeVertex[currNode -> vertex] = currNode -> children.front();
+    }
+
+    for(auto childNode : currNode -> children) {
+        calculateDepthNodes(childNode, depth + 1);
+    }
+}
+
 void NiceTreeNode::setParent(NiceTreeNode* parentNode) {
     this -> parent = parentNode;
 }
