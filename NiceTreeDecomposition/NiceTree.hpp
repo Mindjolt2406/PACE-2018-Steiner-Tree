@@ -34,18 +34,23 @@ class NiceTreeNode {
     public: 
     static int classNodeID;
     static vector<string> niceNodeTypeArr;
-    static vector<vector<int> >  adjGraph;
-    
+    static vector<pair<int, int> >  edgeList;
+
+    const int nodeID;
     NiceTreeNode* parent;
     vector<NiceTreeNode*> children;
     vector<int> bag;
     NiceNodeType niceNodeType = NiceNodeType::NONE;
-    int nodeID;
+
+    // Vertex introduced or forgotten
+    int vertex; 
 
     NiceTreeNode(vector<int> &bag);
 
     void generateNodesLeaf();
-
+    
+    // Called only for root with a non zero bag size
+    NiceTreeNode* generateRoot();
 
     void generateDiffNodes(vector<int> &introduceNodes, 
     vector<int> &forgetNodes, NiceTreeNode* destNode);
@@ -55,15 +60,16 @@ class NiceTreeNode {
     void generateIFNodes(vector<int> &introduceNodes, 
     vector<int> &forgetNodes, NiceTreeNode* destNode);
 
+    // Setters
     void setNiceNodeType(NiceNodeType niceNodeType) ;
+
+    void setParent(NiceTreeNode* parent);
 
     void static readInput();
 
     void static dfsNodes(int currNode, int parentNode, vector<vector<int> > &adj, vector<NiceTreeNode*> &niceTreeNodes);
 
     void static dfsNiceTreeNodes(NiceTreeNode* niceTreeNode, int offsetNum = 0);
-
-    void setParent(NiceTreeNode* parent);
 }; 
 
 #endif

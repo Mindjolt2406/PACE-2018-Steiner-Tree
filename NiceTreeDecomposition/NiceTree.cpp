@@ -4,6 +4,7 @@
 // Change to consider adding edges as well
 NiceTreeNode::NiceTreeNode(vector<int> &bag) : nodeID(NiceTreeNode::classNodeID++) {
     this -> bag = bag;
+    this -> parent = NULL;
 }
 
 void NiceTreeNode::generateNodesLeaf() {
@@ -138,7 +139,10 @@ void NiceTreeNode::readInput() {
     dfsNodes(0, -1, adjNodes, niceTreeNodes);
 
     // for(auto it : niceTreeNodes) dfsNiceTreeNodes(it);
-    dfsNiceTreeNodes(niceTreeNodes.front());
+
+    NiceTreeNode* finalRoot = niceTreeNodes.front() -> generateRoot();
+
+    dfsNiceTreeNodes(finalRoot);
 }
 
 void NiceTreeNode::dfsNodes(int currNode, int parentNode, vector<vector<int> > &adj, vector<NiceTreeNode*> &niceTreeNodes) {
@@ -164,7 +168,7 @@ void NiceTreeNode::dfsNiceTreeNodes(NiceTreeNode* niceTreeNode, int offsetNum) {
     string offset(offsetNum, '-');
     if(offsetNum) offset += "  ";
     cerr << offset; t(niceTreeNode -> nodeID);
-    if(niceTreeNode -> parent) {cerr << offset; t(niceTreeNode -> parent -> nodeID);}
+    if(niceTreeNode -> parent != NULL) {cerr << offset; t(niceTreeNode -> parent -> nodeID);}
     cerr << offset; cerr << "niceNodeType: " << niceNodeTypeArr[(int)niceTreeNode -> niceNodeType] << endl;
     cerr << offset; t(niceTreeNode -> children);
     cerr << offset; t(niceTreeNode -> bag);
@@ -173,6 +177,27 @@ void NiceTreeNode::dfsNiceTreeNodes(NiceTreeNode* niceTreeNode, int offsetNum) {
     for(auto it : niceTreeNode -> children) {
         dfsNiceTreeNodes(it, offsetNum+2);
     }
+}
+
+NiceTreeNode* NiceTreeNode::generateRoot() {
+
+    // Non-legitimate call
+    if(this -> parent != NULL) {
+        return this;
+    }
+
+    // bag is empty, don't generate more parent nodes
+    if(this -> bag.size() == 0) {
+        return this;
+    }
+
+    vector<int> parentBag = this -> bag;
+    parentBag.pop_back();
+    NiceTreeNode* parentNode = new NiceTreeNode(parentBag);
+    parentNode -> children.push_back(this);
+    parentNode -> setNiceNodeType(NiceNodeType::FORGET);
+
+    return parentNode -> generateRoot();
 }
 
 void NiceTreeNode::setParent(NiceTreeNode* parentNode) {
