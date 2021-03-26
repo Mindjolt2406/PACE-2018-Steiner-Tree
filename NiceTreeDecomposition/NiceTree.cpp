@@ -14,7 +14,9 @@ void NiceTreeNode::generateNodesLeaf() {
 
     this -> niceNodeType = NiceNodeType::VERTEX;
     vector<int> childBag = bag;
+    int introduceNode = childBag.back();
     childBag.pop_back();
+    this -> vertex = introduceNode;
     NiceTreeNode* childNode = new NiceTreeNode(childBag);
     children.push_back(childNode);
     childNode -> setParent(this);
@@ -72,11 +74,17 @@ vector<int> &forgetNodes, NiceTreeNode* destNode) {
         children.push_back(destNode);
         destNode -> setParent(this);
         this -> niceNodeType = (introduceNodes.size() == 1) ? NiceNodeType::VERTEX : NiceNodeType::FORGET;
+        if(!introduceNodes.empty()) {
+            this -> vertex = introduceNodes.front();
+        } else {
+            this -> vertex = forgetNodes.front();
+        }
     } else {
         if(!introduceNodes.empty()) {
             this -> niceNodeType = NiceNodeType::VERTEX;
             int introduceNode = introduceNodes.back();
             introduceNodes.pop_back();
+            this -> vertex = introduceNode;
             vector<int> childBag = bag;
             childBag.erase(remove(childBag.begin(), childBag.end(), introduceNode), childBag.end());
             NiceTreeNode* childNode = new NiceTreeNode(childBag);
@@ -87,6 +95,7 @@ vector<int> &forgetNodes, NiceTreeNode* destNode) {
             this -> niceNodeType = NiceNodeType::FORGET;
             int forgetNode = forgetNodes.back();
             forgetNodes.pop_back();
+            this -> vertex = forgetNode;
             vector<int> childBag = bag;
             childBag.push_back(forgetNode);
             NiceTreeNode* childNode = new NiceTreeNode(childBag);
@@ -102,7 +111,7 @@ void NiceTreeNode::setNiceNodeType(NiceNodeType niceNodeType) {
 } 
 
 // Reads the treewidth section of the input
-void NiceTreeNode::readInput() {
+void NiceTreeNode::readInput(int numNodes) {
     string sectionName, treeName, decompositionName, newLine;
     cin >> sectionName >> treeName >> decompositionName;
     string sName, tdName;
@@ -120,7 +129,7 @@ void NiceTreeNode::readInput() {
         vector<int> bag;
         while (ss >> word) {
             if(word != "b") {
-                bag.push_back(stoi(word));
+                bag.push_back(stoi(word)-1);
             }
         }
 
@@ -142,7 +151,11 @@ void NiceTreeNode::readInput() {
 
     NiceTreeNode* finalRoot = niceTreeNodes.front() -> generateRoot();
 
-    dfsNiceTreeNodes(finalRoot);
+    calculateDepthNodes(finalRoot);
+
+    addIntroduceEdgeNodes(numNodes);
+
+    finalRoot -> prettyPrintNiceTree();
 }
 
 void NiceTreeNode::dfsNodes(int currNode, int parentNode, vector<vector<int> > &adj, vector<NiceTreeNode*> &niceTreeNodes) {
@@ -156,7 +169,6 @@ void NiceTreeNode::dfsNodes(int currNode, int parentNode, vector<vector<int> > &
         }
     }
 
-    // t(currNode, childTreeNodes.size());
     if(isLeaf) {
         niceTreeNodes[currNode] -> generateNodesLeaf();
     } else {
@@ -164,18 +176,20 @@ void NiceTreeNode::dfsNodes(int currNode, int parentNode, vector<vector<int> > &
     }
 }
 
-void NiceTreeNode::dfsNiceTreeNodes(NiceTreeNode* niceTreeNode, int offsetNum) {
+void NiceTreeNode::prettyPrintNiceTree(int offsetNum) {
     string offset(offsetNum, '-');
     if(offsetNum) offset += "  ";
-    cerr << offset; t(niceTreeNode -> nodeID);
-    if(niceTreeNode -> parent != NULL) {cerr << offset; t(niceTreeNode -> parent -> nodeID);}
-    cerr << offset; cerr << "niceNodeType: " << niceNodeTypeArr[(int)niceTreeNode -> niceNodeType] << endl;
-    cerr << offset; t(niceTreeNode -> children);
-    cerr << offset; t(niceTreeNode -> bag);
+    cerr << offset; t(nodeID);
+    if(parent != NULL) {cerr << offset; t(parent -> nodeID);}
+    cerr << offset; cerr << "niceNodeType: " << niceNodeTypeArr[(int)niceNodeType] << endl;
+    // cerr << offset; t(children);
+    if(niceNodeType == NiceNodeType::EDGE) {cerr << offset; t(edge);}
+    if(niceNodeType == NiceNodeType::VERTEX || niceNodeType == NiceNodeType::FORGET) {cerr << offset; t(vertex);}
+    cerr << offset; t(bag);
     cerr << endl;
     
-    for(auto it : niceTreeNode -> children) {
-        dfsNiceTreeNodes(it, offsetNum+2);
+    for(auto it : children) {
+        it -> prettyPrintNiceTree(offsetNum+2);
     }
 }
 
@@ -192,18 +206,28 @@ NiceTreeNode* NiceTreeNode::generateRoot() {
     }
 
     vector<int> parentBag = this -> bag;
+    int forgetNode = parentBag.back();
     parentBag.pop_back();
     NiceTreeNode* parentNode = new NiceTreeNode(parentBag);
     parentNode -> children.push_back(this);
     parentNode -> setNiceNodeType(NiceNodeType::FORGET);
+    parentNode -> vertex = forgetNode;
+    this -> parent = parentNode;
 
     return parentNode -> generateRoot();
 }
 
 // Add a node "introducing" the edge just before we forget that vertex. 
 void NiceTreeNode::addIntroduceEdgeNodeForVertex(vector<pair<int, int> > &edgesToAdd) {
+
+    // Error handling, should never reach here
+    if(this -> parent == NULL) {
+        cerr << "Incorrect node chosen to introduce edges" << endl;
+        return;
+    }
+
     int parentChildIndex = 0;
-    if(this -> parent -> niceNodeType == NiceNodeType::FORGET) {
+    if(this -> parent -> niceNodeType == NiceNodeType::JOIN) {
         parentChildIndex = (parent -> children.front() -> nodeID == this -> nodeID) ? 0 : 1;
     }
 
@@ -217,17 +241,17 @@ void NiceTreeNode::addIntroduceEdgeNodeForVertex(vector<pair<int, int> > &edgesT
         this -> parent = newEdgeNode;
         newEdgeNode -> niceNodeType = NiceNodeType::EDGE;
 
-        newEdgeNode -> edgeList = this -> edgeList;
-        newEdgeNode -> edgeList.push_back(edge);
+        newEdgeNode -> edge = edge;
     }
 }
 
-void static NiceTreeNode::addIntroduceEdgeNodes(int numNodes) {
+void NiceTreeNode::addIntroduceEdgeNodes(int numNodes) {
+    for(auto it : highestNodeVertex) t(it);
     for(int i = 0; i < numNodes; i++) {
         vector<pair<int, int> > edgesToAdd;
         int currDepthHighestNodeVertex = highestNodeVertex[i] -> depthNode;
         for(auto child : adjNodes[i]) {
-            if(highestNodeVertex[child] -> depthNode < currDepthHigestNodeVertex) {
+            if(highestNodeVertex[child] -> depthNode < currDepthHighestNodeVertex) {
                 edgesToAdd.push_back(make_pair(i, child));
             }
         }
@@ -236,9 +260,10 @@ void static NiceTreeNode::addIntroduceEdgeNodes(int numNodes) {
     }
 }
 
-void static NiceTreeNode::calculateDepthNodes(NiceTreeNode* currNode, int depth = 0) {
+void NiceTreeNode::calculateDepthNodes(NiceTreeNode* currNode, int depth) {
     currNode -> depthNode = depth;
 
+    t(currNode -> nodeID, currNode -> bag, currNode -> vertex);
     if(currNode -> niceNodeType == NiceNodeType :: FORGET) {
         highestNodeVertex[currNode -> vertex] = currNode -> children.front();
     }
@@ -253,14 +278,30 @@ void NiceTreeNode::setParent(NiceTreeNode* parentNode) {
 }
 
 ostream& operator <<(ostream &os, NiceTreeNode* niceTreeNode) {
-    os << (int)niceTreeNode -> nodeID;
+    os << (int)niceTreeNode -> nodeID << ", " << niceTreeNode -> depthNode;
+    return os;
+}
+
+ostream& operator<<(ostream &os, NiceNodeType &niceNodeType) {
+    os << NiceTreeNode::niceNodeTypeArr[(int)niceNodeType];
     return os;
 }
 
 int NiceTreeNode::classNodeID = 0;
 vector<string> NiceTreeNode::niceNodeTypeArr = {"Introduce", "Edge", "Forget", "Join", "None"};
-//
+vector< vector<int> >  NiceTreeNode::adjNodes;
+map<int, NiceTreeNode* > NiceTreeNode::highestNodeVertex; 
+
 /*
+SECTION GRAPH
+NODES 5
+EDGES 5
+E 1 2 1
+E 2 3 1
+E 3 4 1
+E 4 5 1
+E 5 1 1
+
 SECTION Tree Decomposition
 s td 4 2 5
 b 1 2
@@ -270,6 +311,21 @@ b 1 4 5
 1 2
 2 3
 3 4
+
+-----------------------
+
+SECTION GRAPH
+NODES 7
+EDGES 9
+E 1 2 1
+E 1 5 1
+E 1 6 1
+E 5 6 1
+E 2 5 1
+E 3 5 1
+E 4 5 1
+E 1 7 1
+E 3 4 1
 
 SECTION Tree Decomposition
 s td 4 2 7

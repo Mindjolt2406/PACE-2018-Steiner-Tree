@@ -42,10 +42,12 @@ class NiceTreeNode {
     vector<NiceTreeNode*> children;
     vector<int> bag;
     NiceNodeType niceNodeType = NiceNodeType::NONE;
-    
+
     // redundant, only used for introducing edges and comparing depths of vertex ancestors
     int depthNode; 
-    vector<pair<int, int> > edgeList;
+
+    // Edge introduced
+    pair<int, int> edge;
 
     // Vertex introduced or forgotten
     int vertex; 
@@ -70,15 +72,19 @@ class NiceTreeNode {
 
     void setParent(NiceTreeNode* parent);
 
-    void addIntroduceEdgeNodes();
+    void addIntroduceEdgeNodeForVertex(vector<pair<int, int> > &edgesToAdd);
 
-    void static readInput();
+    void prettyPrintNiceTree(int offsetNum = 0);
+
+    void static readInput(int numNodes);
 
     void static dfsNodes(int currNode, int parentNode, vector<vector<int> > &adj, vector<NiceTreeNode*> &niceTreeNodes);
 
-    void static calculateDepthNodes(NiceTreeNode* currNode, int depth);
+    void static calculateDepthNodes(NiceTreeNode* currNode, int depth = 0);
 
-    void static dfsNiceTreeNodes(NiceTreeNode* niceTreeNode, int offsetNum = 0);
+    void static addIntroduceEdgeNodes(int numNodes);
+
+    friend ostream& operator<<(ostream &os, NiceNodeType &niceNodeType);
 }; 
 
 #endif
