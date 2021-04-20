@@ -29,7 +29,6 @@ enum class NiceNodeType {
     NONE // Null nodes
 }; 
 
-// Change to consider adding edges as well
 class NiceTreeNode {
     public: 
     static int classNodeID;
