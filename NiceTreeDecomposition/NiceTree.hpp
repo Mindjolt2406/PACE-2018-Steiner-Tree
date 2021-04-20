@@ -75,7 +75,7 @@ class NiceTreeNode {
 
     void prettyPrintNiceTree(int offsetNum = 0);
 
-    void static readInput(int numNodes);
+    NiceTreeNode* static readInput(int numNodes);
 
     void static dfsNodes(int currNode, int parentNode, vector<vector<int> > &adj, vector<NiceTreeNode*> &niceTreeNodes);
 

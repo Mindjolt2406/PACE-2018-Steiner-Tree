@@ -29,6 +29,7 @@ int main() {
     map<pair<int, int>, int> edgeWeight;
     readGraph(numNodes, adjNodes, edgeWeight);
     NiceTreeNode::adjNodes = adjNodes;
-    NiceTreeNode::readInput(numNodes);
+    NiceTreeNode* root = NiceTreeNode::readInput(numNodes);
+    root -> prettyPrintNiceTree();
     return 0;
 }

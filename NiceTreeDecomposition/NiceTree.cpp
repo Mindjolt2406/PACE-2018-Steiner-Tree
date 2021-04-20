@@ -111,7 +111,7 @@ void NiceTreeNode::setNiceNodeType(NiceNodeType niceNodeType) {
 } 
 
 // Reads the treewidth section of the input
-void NiceTreeNode::readInput(int numNodes) {
+NiceTreeNode* NiceTreeNode::readInput(int numNodes) {
     string sectionName, treeName, decompositionName, newLine;
     cin >> sectionName >> treeName >> decompositionName;
     string sName, tdName;
@@ -155,7 +155,9 @@ void NiceTreeNode::readInput(int numNodes) {
 
     addIntroduceEdgeNodes(numNodes);
 
-    finalRoot -> prettyPrintNiceTree();
+    // finalRoot -> prettyPrintNiceTree();
+
+    return finalRoot;
 }
 
 void NiceTreeNode::dfsNodes(int currNode, int parentNode, vector<vector<int> > &adj, vector<NiceTreeNode*> &niceTreeNodes) {
