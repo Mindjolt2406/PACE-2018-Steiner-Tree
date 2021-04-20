@@ -75,13 +75,13 @@ class NiceTreeNode {
 
     void prettyPrintNiceTree(int offsetNum = 0);
 
-    NiceTreeNode* static readInput(int numNodes);
+    static NiceTreeNode* readInput(int numNodes);
 
-    void static dfsNodes(int currNode, int parentNode, vector<vector<int> > &adj, vector<NiceTreeNode*> &niceTreeNodes);
+    static void dfsNodes(int currNode, int parentNode, vector<vector<int> > &adj, vector<NiceTreeNode*> &niceTreeNodes);
 
-    void static calculateDepthNodes(NiceTreeNode* currNode, int depth = 0);
+    static void calculateDepthNodes(NiceTreeNode* currNode, int depth = 0);
 
-    void static addIntroduceEdgeNodes(int numNodes);
+    static void addIntroduceEdgeNodes(int numNodes);
 
     friend ostream& operator<<(ostream &os, NiceNodeType &niceNodeType);
 }; 

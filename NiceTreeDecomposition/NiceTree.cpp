@@ -120,20 +120,23 @@ NiceTreeNode* NiceTreeNode::readInput(int numNodes) {
     cin >> bagNum >> treeWidth >> nodesNum;
 
     getline(cin, newLine);
-    vector<NiceTreeNode*> niceTreeNodes;
+    vector<NiceTreeNode*> niceTreeNodes(bagNum);
     for(int i = 0; i < bagNum; i++) {
         string line;
         getline(cin, line);
         stringstream ss(line);
         string word;
         vector<int> bag;
+        int bagID = -1;
         while (ss >> word) {
-            if(word != "b") {
+            if(bagID == -1 && word != "b") {
+                bagID = stoi(word)-1;
+            } else if(word != "b") {
                 bag.push_back(stoi(word)-1);
             }
         }
 
-        niceTreeNodes.push_back(new NiceTreeNode(bag));
+        niceTreeNodes[bagID] = new NiceTreeNode(bag);
     }
 
     vector<vector<int> > adjNodes(bagNum);
@@ -306,13 +309,13 @@ E 5 1 1
 
 SECTION Tree Decomposition
 s td 4 2 5
-b 1 2
-b 1 2 3
-b 1 3 4
-b 1 4 5
-1 2
-2 3
-3 4
+b 3 1 2
+b 2 1 2 3
+b 1 1 3 4
+b 4 1 4 5
+3 2
+2 1
+4 1
 
 -----------------------
 
@@ -331,10 +334,10 @@ E 3 4 1
 
 SECTION Tree Decomposition
 s td 4 2 7
-b 1 2 5
-b 3 4 5
-b 1 5 6
-b 1 7
+b 1 1 2 5
+b 2 3 4 5
+b 3 1 5 6
+b 4 1 7
 1 2
 1 3
 1 4
