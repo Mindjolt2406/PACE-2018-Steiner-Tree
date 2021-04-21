@@ -2,7 +2,7 @@
 #define __NICE__TREE_
 
 #include<bits/stdc++.h>
-#define INF 1e9+1
+#define INF 1e18+1
 // g++ -std=c++17 -Wl,-stack_size -Wl,0x10000000 main.cpp
 #define t1(x)                cerr<<#x<<" : "<<x<<endl
 #define t2(x, y)             cerr<<#x<<" : "<<x<<" "<<#y<<" : "<<y<<endl
