@@ -37,6 +37,7 @@ class NiceTreeNode {
     static vector<string> niceNodeTypeArr;
     static vector< vector<int> >  adjNodes;
     static map<int, NiceTreeNode* > highestNodeVertex; 
+    static int treeWidth;
 
     const int nodeID;
     NiceTreeNode* parent;

@@ -127,6 +127,7 @@ NiceTreeNode* NiceTreeNode::readInput(int numNodes) {
     cin >> sName >> tdName;
     int bagNum, treeWidth, nodesNum;
     cin >> bagNum >> treeWidth >> nodesNum;
+    NiceTreeNode::treeWidth = treeWidth;
 
     getline(cin, newLine);
     vector<NiceTreeNode*> niceTreeNodes(bagNum);
@@ -165,14 +166,11 @@ NiceTreeNode* NiceTreeNode::readInput(int numNodes) {
 
     NiceTreeNode* finalRoot = niceTreeNodes.front() -> generateRoot();
 
-    finalRoot -> prettyPrintNiceTree();
-
     calculateDepthNodes(finalRoot);
 
     addIntroduceEdgeNodes(numNodes);
 
-    // finalRoot -> prettyPrintNiceTree();
-
+    cout << "Nice Tree Decomposition Created!" << endl;
     return finalRoot;
 }
 
@@ -318,6 +316,7 @@ int NiceTreeNode::classNodeID = 0;
 vector<string> NiceTreeNode::niceNodeTypeArr = {"None", "Edge", "Forget", "Join", "Introduce", "Weird"};
 vector< vector<int> >  NiceTreeNode::adjNodes;
 map<int, NiceTreeNode* > NiceTreeNode::highestNodeVertex; 
+int NiceTreeNode::treeWidth;
 
 /*
 SECTION GRAPH

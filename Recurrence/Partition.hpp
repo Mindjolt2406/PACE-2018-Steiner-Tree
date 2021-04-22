@@ -17,8 +17,8 @@ class Partition {
     static vector<pair<vector<set<int> >,vector< set<int> > > > permutationMapper(set<set<int> >  &v);
 
     private:
-    static void dfs(int u, int key, vector<vector<int> > &adj, vector<int> &vis);
-    static void getFinalMergedSetFromEdges(vector<pair<int, int> > &allEdges, vector<set<int> > &finalMergedSet, int n);
+    // static void dfs(int u, int key, vector<vector<int> > &adj, vector<int> &vis);
+    // static void getFinalMergedSetFromEdges(vector<pair<int, int> > &allEdges, vector<set<int> > &finalMergedSet, int n);
     static bool checkMerge(vector<set<int> > &partLeft, vector<set<int> > &partRight, vector<set<int> > &finalMergedSet, int n);
     static void getMergedPairMap(vector<vector<set<int> > > &partitionMap, 
     map<vector<set<int> >, int > &inversePartitionMap, 
