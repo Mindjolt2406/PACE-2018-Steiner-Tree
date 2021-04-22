@@ -1,9 +1,11 @@
+#include "Recurrence/Recurrence.hpp"
+#include "Recurrence/Partition.hpp"
 #include "NiceTreeDecomposition/NiceTree.hpp"
 // #include<bits/stdc++.h>
 // using namespace std;
 
 void readGraph(int &numNodes, vector<vector<int> > &adjNodes, map<pair<int, int>, int> &edgeWeight) {
-    string sectionName, graphName, nodesName, edgesName;
+    string sectionName, graphName, nodesName, edgesName, endName;
     int numEdges;
     cin >> sectionName >> graphName >> nodesName >> numNodes >> edgesName >> numEdges;
     adjNodes.resize(numNodes);
@@ -20,15 +22,44 @@ void readGraph(int &numNodes, vector<vector<int> > &adjNodes, map<pair<int, int>
 
         edgeWeight[make_pair(u, v)] = edgeWeight[make_pair(v, u)] = w;
     }
-}   
+    cin >> endName;
+} 
+
+void readTerminals(vector<int> &terminals) {
+    string sectionName, terminalName, terminalsName, endName;
+    int terminalNum;
+
+    cin >> sectionName >> terminalName >> terminalsName;
+    cin >> terminalNum;
+    
+    for(int i = 0; i < terminalNum; i++) {
+        string tName;
+        cin >> tName;
+
+        int u;
+        cin >> u;
+        u--;
+
+        terminals.push_back(u);
+    }
+
+    cin >> endName;
+}
 
 int main() {
     __;
     int numNodes;
     vector<vector<int> > adjNodes;
     map<pair<int, int>, int> edgeWeight;
+    vector<int> terminals;
+
     readGraph(numNodes, adjNodes, edgeWeight);
+    readTerminals(terminals);
+
     NiceTreeNode::adjNodes = adjNodes;
-    NiceTreeNode::readInput(numNodes);
+    NiceTreeNode* root = NiceTreeNode::readInput(numNodes);
+    // root -> prettyPrintNiceTree();
+
+    Partition::precomputeMaps(5);
     return 0;
 }

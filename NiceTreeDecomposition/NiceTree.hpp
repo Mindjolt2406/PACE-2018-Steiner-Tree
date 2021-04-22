@@ -2,7 +2,7 @@
 #define __NICE__TREE_
 
 #include<bits/stdc++.h>
-#define INF 1e9+1
+#define INF 1e18+1
 // g++ -std=c++17 -Wl,-stack_size -Wl,0x10000000 main.cpp
 #define t1(x)                cerr<<#x<<" : "<<x<<endl
 #define t2(x, y)             cerr<<#x<<" : "<<x<<" "<<#y<<" : "<<y<<endl
@@ -17,16 +17,18 @@
 
 using namespace std;
 // mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-template<class A, class B> ostream& operator<<(ostream& out, const pair<A, B> &a){ return out<<"("<<a.first<<", "<<a.second<<")";}
 template <int> ostream& operator<<(ostream& os, const vector<int>& v) { os << "["; for (int i = 0; i < v.size(); ++i) { if(v[i]!=INF) os << v[i]; else os << "INF";if (i != v.size() - 1) os << ", "; } os << "]"; return os; } 
 template <typename T> ostream& operator<<(ostream& os, const vector<T>& v) { os << "["; for (int i = 0; i < v.size(); ++i) { os << v[i]; ;if (i != v.size() - 1) os << ", "; } os << "]"; return os; } 
+template <typename T> ostream& operator<<(ostream& os, const set<T>& s) {os << "{"; for(auto it : s) {if(it != *s.rbegin()) os << it << ", "; else os << it;} os << "}"; return os;}
+template<class A, class B> ostream& operator<<(ostream& out, const pair<A, B> &a){ return out<<"("<<a.first<<", "<<a.second<<")";}
 
 enum class NiceNodeType {
-    VERTEX, 
+    NONE, // Null nodes
     EDGE, 
     FORGET, 
     JOIN, 
-    NONE // Null nodes
+    VERTEX, 
+    WEIRD
 }; 
 
 class NiceTreeNode {
@@ -75,13 +77,15 @@ class NiceTreeNode {
 
     void prettyPrintNiceTree(int offsetNum = 0);
 
-    void static readInput(int numNodes);
+    bool isLeaf();
 
-    void static dfsNodes(int currNode, int parentNode, vector<vector<int> > &adj, vector<NiceTreeNode*> &niceTreeNodes);
+    static NiceTreeNode* readInput(int numNodes);
 
-    void static calculateDepthNodes(NiceTreeNode* currNode, int depth = 0);
+    static void dfsNodes(int currNode, int parentNode, vector<vector<int> > &adj, vector<NiceTreeNode*> &niceTreeNodes);
 
-    void static addIntroduceEdgeNodes(int numNodes);
+    static void calculateDepthNodes(NiceTreeNode* currNode, int depth = 0);
+
+    static void addIntroduceEdgeNodes(int numNodes);
 
     friend ostream& operator<<(ostream &os, NiceNodeType &niceNodeType);
 }; 
