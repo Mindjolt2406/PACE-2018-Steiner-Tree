@@ -1,5 +1,6 @@
-#include "NiceTreeDecomposition/NiceTree.hpp"
 #include "Recurrence/Recurrence.hpp"
+#include "Recurrence/Partition.hpp"
+#include "NiceTreeDecomposition/NiceTree.hpp"
 // #include<bits/stdc++.h>
 // using namespace std;
 
@@ -58,5 +59,7 @@ int main() {
     NiceTreeNode::adjNodes = adjNodes;
     NiceTreeNode* root = NiceTreeNode::readInput(numNodes);
     // root -> prettyPrintNiceTree();
+
+    Partition::precomputeMaps(5);
     return 0;
 }

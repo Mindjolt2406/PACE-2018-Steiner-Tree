@@ -300,6 +300,10 @@ void NiceTreeNode::setParent(NiceTreeNode* parentNode) {
     this -> parent = parentNode;
 }
 
+bool NiceTreeNode::isLeaf() {
+    return (this -> bag.size() == 1);
+}
+
 ostream& operator <<(ostream &os, NiceTreeNode* niceTreeNode) {
     os << "(" << (int)niceTreeNode -> nodeID << ", " << NiceTreeNode::niceNodeTypeArr[(int) niceTreeNode -> niceNodeType] << ")";
     return os;

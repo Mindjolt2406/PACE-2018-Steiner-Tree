@@ -17,10 +17,10 @@
 
 using namespace std;
 // mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-template<class A, class B> ostream& operator<<(ostream& out, const pair<A, B> &a){ return out<<"("<<a.first<<", "<<a.second<<")";}
 template <int> ostream& operator<<(ostream& os, const vector<int>& v) { os << "["; for (int i = 0; i < v.size(); ++i) { if(v[i]!=INF) os << v[i]; else os << "INF";if (i != v.size() - 1) os << ", "; } os << "]"; return os; } 
 template <typename T> ostream& operator<<(ostream& os, const vector<T>& v) { os << "["; for (int i = 0; i < v.size(); ++i) { os << v[i]; ;if (i != v.size() - 1) os << ", "; } os << "]"; return os; } 
 template <typename T> ostream& operator<<(ostream& os, const set<T>& s) {os << "{"; for(auto it : s) {if(it != *s.rbegin()) os << it << ", "; else os << it;} os << "}"; return os;}
+template<class A, class B> ostream& operator<<(ostream& out, const pair<A, B> &a){ return out<<"("<<a.first<<", "<<a.second<<")";}
 
 enum class NiceNodeType {
     NONE, // Null nodes
@@ -76,6 +76,8 @@ class NiceTreeNode {
     void addIntroduceEdgeNodeForVertex(vector<pair<int, int> > &edgesToAdd);
 
     void prettyPrintNiceTree(int offsetNum = 0);
+
+    bool isLeaf();
 
     static NiceTreeNode* readInput(int numNodes);
 
