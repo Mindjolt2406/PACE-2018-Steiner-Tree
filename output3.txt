@@ -1,5 +1,37 @@
-here
-here
+nodeID : 4
+niceNodeType: Forget
+vertex : 0
+bag : []
+
+--  nodeID : 3
+--  parent -> nodeID : 4
+--  niceNodeType: Forget
+--  vertex : 1
+--  bag : [0]
+
+----  nodeID : 5
+----  parent -> nodeID : 3
+----  niceNodeType: Edge
+----  edge : (1, 0)
+----  bag : [0, 1]
+
+------  nodeID : 0
+------  parent -> nodeID : 5
+------  niceNodeType: Introduce
+------  vertex : 1
+------  bag : [0, 1]
+
+--------  nodeID : 1
+--------  parent -> nodeID : 0
+--------  niceNodeType: Introduce
+--------  vertex : 0
+--------  bag : [0]
+
+----------  nodeID : 2
+----------  parent -> nodeID : 1
+----------  niceNodeType: None
+----------  bag : []
+
 Recurrence::specialTerminal : 0 Recurrence::terminals : {0, 1}
 --------
 root: nodeID: 4
@@ -61,23 +93,6 @@ dpKey : (1, ({0}, {{0}})) dp[dpKey] : 0
 dpKey : (0, ({0, 1}, {{0}, {1}})) dp[dpKey] : 0
 dp[dpKey] : 100 dpKey : (5, ({0, 1}, {{0, 1}}))
 dpKey : (5, ({0, 1}, {{0, 1}})) dp[dpKey] : 100
---------
-root: Parent Node ID: 3
-nodeID: 5
-niceNodeType: Edge
-edge: (1, 0)
-bag: [0, 1]
-forestSet : {0, 1} partition : {{0}}
---------
-root: Parent Node ID: 5
-nodeID: 0
-niceNodeType: Introduce
-vertex: 1
-bag: [0, 1]
-forestSet : {0, 1} partition : {{0}}
-root -> nodeID : 0 childRoot -> nodeID : 1 vertex : 1 dpKey : (0, ({0, 1}, {{0}}))
-dpKey : (0, ({0, 1}, {{0}})) dp[dpKey] : 1000000000000000000
-dpKey : (5, ({0, 1}, {{0}})) dp[dpKey] : 1000000000000000000
 --------
 root: Parent Node ID: 3
 nodeID: 5

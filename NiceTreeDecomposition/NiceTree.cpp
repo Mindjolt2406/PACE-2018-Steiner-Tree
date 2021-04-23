@@ -374,6 +374,15 @@ E 1 7 1
 E 3 4 1
 END
 
+SECTION Terminals
+Terminals 5
+T 7
+T 2
+T 6
+T 3
+T 4
+END
+
 SECTION Tree Decomposition
 s td 4 2 7
 b 1 1 2 5
