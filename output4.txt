@@ -1,0 +1,400 @@
+here
+here
+Recurrence::specialTerminal : 0 Recurrence::terminals : {0, 1, 2}
+--------
+root: nodeID: 6
+niceNodeType: Forget
+vertex: 0
+bag: [0]
+forestSet : {0} partition : {{0}}
+--------
+root: Parent Node ID: 6
+nodeID: 5
+niceNodeType: Forget
+vertex: 1
+bag: [0]
+forestSet : {0} partition : {{0}}
+vertex : 1 tempForestSet : {0, 1} tempPartition : {{0, 1}}
+--------
+root: Parent Node ID: 5
+nodeID: 7
+niceNodeType: Edge
+edge: (1, 0)
+bag: [0, 1]
+forestSet : {0, 1} partition : {{0, 1}}
+--------
+root: Parent Node ID: 7
+nodeID: 0
+niceNodeType: Introduce
+vertex: 0
+bag: [0, 1]
+forestSet : {0, 1} partition : {{0, 1}}
+root -> nodeID : 0 childRoot -> nodeID : 4 vertex : 0 dpKey : (0, ({0, 1}, {{0, 1}}))
+--------
+root: Parent Node ID: 0
+nodeID: 4
+niceNodeType: Forget
+vertex: 2
+bag: [1, 0]
+forestSet : {0, 1} partition : {{0, 1}}
+vertex : 2 tempForestSet : {0, 1, 2} tempPartition : {{0, 1, 2}}
+--------
+root: Parent Node ID: 4
+nodeID: 8
+niceNodeType: Edge
+edge: (2, 1)
+bag: [1, 2, 0]
+forestSet : {0, 1, 2} partition : {{0, 1, 2}}
+--------
+root: Parent Node ID: 8
+nodeID: 1
+niceNodeType: Introduce
+vertex: 2
+bag: [1, 2, 0]
+forestSet : {0, 1, 2} partition : {{0, 1, 2}}
+root -> nodeID : 1 childRoot -> nodeID : 2 vertex : 2 dpKey : (1, ({0, 1, 2}, {{0, 1, 2}}))
+dpKey : (1, ({0, 1, 2}, {{0, 1, 2}})) dp[dpKey] : 1000000000000000000
+dp[dpKey] : 1000000000000000000 "Edgeeee" : Edgeeee
+edge : (2, 1) edgeWeight[edge] : 50
+--------
+root: Parent Node ID: 8
+nodeID: 1
+niceNodeType: Introduce
+vertex: 2
+bag: [1, 2, 0]
+forestSet : {0, 1, 2} partition : {{0, 1}, {2}}
+root -> nodeID : 1 childRoot -> nodeID : 2 vertex : 2 dpKey : (1, ({0, 1, 2}, {{0, 1}, {2}}))
+"Introduce" : Introduce childRoot -> nodeID : 2 forestSet : {0, 1} partition : {{0, 1}}
+--------
+root: Parent Node ID: 1
+nodeID: 2
+niceNodeType: Introduce
+vertex: 1
+bag: [1, 0]
+forestSet : {0, 1} partition : {{0, 1}}
+root -> nodeID : 2 childRoot -> nodeID : 3 vertex : 1 dpKey : (2, ({0, 1}, {{0, 1}}))
+dpKey : (2, ({0, 1}, {{0, 1}})) dp[dpKey] : 1000000000000000000
+dpKey : (1, ({0, 1, 2}, {{0, 1}, {2}})) dp[dpKey] : 1000000000000000000
+edge : (2, 1) edgeWeight[edge] : 50
+--------
+root: Parent Node ID: 8
+nodeID: 1
+niceNodeType: Introduce
+vertex: 2
+bag: [1, 2, 0]
+forestSet : {0, 1, 2} partition : {{0, 2}, {1}}
+root -> nodeID : 1 childRoot -> nodeID : 2 vertex : 2 dpKey : (1, ({0, 1, 2}, {{0, 2}, {1}}))
+dpKey : (1, ({0, 1, 2}, {{0, 2}, {1}})) dp[dpKey] : 1000000000000000000
+dp[dpKey] : 1000000000000000000 dpKey : (8, ({0, 1, 2}, {{0, 1, 2}}))
+dpKey : (8, ({0, 1, 2}, {{0, 1, 2}})) dp[dpKey] : 1000000000000000000
+--------
+root: Parent Node ID: 4
+nodeID: 8
+niceNodeType: Edge
+edge: (2, 1)
+bag: [1, 2, 0]
+forestSet : {0, 1, 2} partition : {{0, 1}}
+--------
+root: Parent Node ID: 8
+nodeID: 1
+niceNodeType: Introduce
+vertex: 2
+bag: [1, 2, 0]
+forestSet : {0, 1, 2} partition : {{0, 1}}
+root -> nodeID : 1 childRoot -> nodeID : 2 vertex : 2 dpKey : (1, ({0, 1, 2}, {{0, 1}}))
+dpKey : (1, ({0, 1, 2}, {{0, 1}})) dp[dpKey] : 1000000000000000000
+dpKey : (8, ({0, 1, 2}, {{0, 1}})) dp[dpKey] : 1000000000000000000
+--------
+root: Parent Node ID: 4
+nodeID: 8
+niceNodeType: Edge
+edge: (2, 1)
+bag: [1, 2, 0]
+forestSet : {0, 1} partition : {{0, 1}}
+--------
+root: Parent Node ID: 8
+nodeID: 1
+niceNodeType: Introduce
+vertex: 2
+bag: [1, 2, 0]
+forestSet : {0, 1} partition : {{0, 1}}
+root -> nodeID : 1 childRoot -> nodeID : 2 vertex : 2 dpKey : (1, ({0, 1}, {{0, 1}}))
+dpKey : (1, ({0, 1}, {{0, 1}})) dp[dpKey] : 1000000000000000000
+dpKey : (8, ({0, 1}, {{0, 1}})) dp[dpKey] : 1000000000000000000
+dpKey : (4, ({0, 1}, {{0, 1}})) dp[dpKey] : 1000000000000000000
+dpKey : (0, ({0, 1}, {{0, 1}})) dp[dpKey] : 1000000000000000000
+dp[dpKey] : 1000000000000000000 "Edgeeee" : Edgeeee
+--------
+root: Parent Node ID: 7
+nodeID: 0
+niceNodeType: Introduce
+vertex: 0
+bag: [0, 1]
+forestSet : {0, 1} partition : {{0}, {1}}
+root -> nodeID : 0 childRoot -> nodeID : 4 vertex : 0 dpKey : (0, ({0, 1}, {{0}, {1}}))
+--------
+root: Parent Node ID: 0
+nodeID: 4
+niceNodeType: Forget
+vertex: 2
+bag: [1, 0]
+forestSet : {0, 1} partition : {{0}, {1}}
+vertex : 2 tempForestSet : {0, 1, 2} tempPartition : {{0, 2}, {1}}
+--------
+root: Parent Node ID: 4
+nodeID: 8
+niceNodeType: Edge
+edge: (2, 1)
+bag: [1, 2, 0]
+forestSet : {0, 1, 2} partition : {{0, 2}, {1}}
+--------
+root: Parent Node ID: 8
+nodeID: 1
+niceNodeType: Introduce
+vertex: 2
+bag: [1, 2, 0]
+forestSet : {0, 1, 2} partition : {{0, 2}, {1}}
+"computed" : computed dpKey : (1, ({0, 1, 2}, {{0, 2}, {1}})) dp[dpKey] : 1000000000000000000
+dpKey : (8, ({0, 1, 2}, {{0, 2}, {1}})) dp[dpKey] : 1000000000000000000
+vertex : 2 tempForestSet : {0, 1, 2} tempPartition : {{0}, {1, 2}}
+--------
+root: Parent Node ID: 4
+nodeID: 8
+niceNodeType: Edge
+edge: (2, 1)
+bag: [1, 2, 0]
+forestSet : {0, 1, 2} partition : {{0}, {1, 2}}
+--------
+root: Parent Node ID: 8
+nodeID: 1
+niceNodeType: Introduce
+vertex: 2
+bag: [1, 2, 0]
+forestSet : {0, 1, 2} partition : {{0}, {1, 2}}
+root -> nodeID : 1 childRoot -> nodeID : 2 vertex : 2 dpKey : (1, ({0, 1, 2}, {{0}, {1, 2}}))
+dpKey : (1, ({0, 1, 2}, {{0}, {1, 2}})) dp[dpKey] : 1000000000000000000
+dp[dpKey] : 1000000000000000000 "Edgeeee" : Edgeeee
+--------
+root: Parent Node ID: 8
+nodeID: 1
+niceNodeType: Introduce
+vertex: 2
+bag: [1, 2, 0]
+forestSet : {0, 1, 2} partition : {{0}, {1}, {2}}
+root -> nodeID : 1 childRoot -> nodeID : 2 vertex : 2 dpKey : (1, ({0, 1, 2}, {{0}, {1}, {2}}))
+"Introduce" : Introduce childRoot -> nodeID : 2 forestSet : {0, 1} partition : {{0}, {1}}
+--------
+root: Parent Node ID: 1
+nodeID: 2
+niceNodeType: Introduce
+vertex: 1
+bag: [1, 0]
+forestSet : {0, 1} partition : {{0}, {1}}
+root -> nodeID : 2 childRoot -> nodeID : 3 vertex : 1 dpKey : (2, ({0, 1}, {{0}, {1}}))
+"Introduce" : Introduce childRoot -> nodeID : 3 forestSet : {0} partition : {{0}}
+--------
+root: Parent Node ID: 2
+nodeID: 3
+niceNodeType: None
+bag: [0]
+forestSet : {0} partition : {{0}}
+forestSet : {0} partition : {{0}}
+dpKey : (3, ({0}, {{0}})) dp[dpKey] : 0
+dpKey : (2, ({0, 1}, {{0}, {1}})) dp[dpKey] : 0
+dpKey : (1, ({0, 1, 2}, {{0}, {1}, {2}})) dp[dpKey] : 0
+dp[dpKey] : 50 dpKey : (8, ({0, 1, 2}, {{0}, {1, 2}}))
+dpKey : (8, ({0, 1, 2}, {{0}, {1, 2}})) dp[dpKey] : 50
+--------
+root: Parent Node ID: 4
+nodeID: 8
+niceNodeType: Edge
+edge: (2, 1)
+bag: [1, 2, 0]
+forestSet : {0, 1, 2} partition : {{0}, {1}}
+--------
+root: Parent Node ID: 8
+nodeID: 1
+niceNodeType: Introduce
+vertex: 2
+bag: [1, 2, 0]
+forestSet : {0, 1, 2} partition : {{0}, {1}}
+root -> nodeID : 1 childRoot -> nodeID : 2 vertex : 2 dpKey : (1, ({0, 1, 2}, {{0}, {1}}))
+dpKey : (1, ({0, 1, 2}, {{0}, {1}})) dp[dpKey] : 1000000000000000000
+dpKey : (8, ({0, 1, 2}, {{0}, {1}})) dp[dpKey] : 1000000000000000000
+--------
+root: Parent Node ID: 4
+nodeID: 8
+niceNodeType: Edge
+edge: (2, 1)
+bag: [1, 2, 0]
+forestSet : {0, 1} partition : {{0}, {1}}
+--------
+root: Parent Node ID: 8
+nodeID: 1
+niceNodeType: Introduce
+vertex: 2
+bag: [1, 2, 0]
+forestSet : {0, 1} partition : {{0}, {1}}
+root -> nodeID : 1 childRoot -> nodeID : 2 vertex : 2 dpKey : (1, ({0, 1}, {{0}, {1}}))
+dpKey : (1, ({0, 1}, {{0}, {1}})) dp[dpKey] : 1000000000000000000
+dpKey : (8, ({0, 1}, {{0}, {1}})) dp[dpKey] : 1000000000000000000
+dpKey : (4, ({0, 1}, {{0}, {1}})) dp[dpKey] : 50
+dpKey : (0, ({0, 1}, {{0}, {1}})) dp[dpKey] : 50
+dp[dpKey] : 150 dpKey : (7, ({0, 1}, {{0, 1}}))
+dpKey : (7, ({0, 1}, {{0, 1}})) dp[dpKey] : 150
+--------
+root: Parent Node ID: 5
+nodeID: 7
+niceNodeType: Edge
+edge: (1, 0)
+bag: [0, 1]
+forestSet : {0, 1} partition : {{0}}
+--------
+root: Parent Node ID: 7
+nodeID: 0
+niceNodeType: Introduce
+vertex: 0
+bag: [0, 1]
+forestSet : {0, 1} partition : {{0}}
+root -> nodeID : 0 childRoot -> nodeID : 4 vertex : 0 dpKey : (0, ({0, 1}, {{0}}))
+--------
+root: Parent Node ID: 0
+nodeID: 4
+niceNodeType: Forget
+vertex: 2
+bag: [1, 0]
+forestSet : {0, 1} partition : {{0}}
+vertex : 2 tempForestSet : {0, 1, 2} tempPartition : {{0, 2}}
+--------
+root: Parent Node ID: 4
+nodeID: 8
+niceNodeType: Edge
+edge: (2, 1)
+bag: [1, 2, 0]
+forestSet : {0, 1, 2} partition : {{0, 2}}
+--------
+root: Parent Node ID: 8
+nodeID: 1
+niceNodeType: Introduce
+vertex: 2
+bag: [1, 2, 0]
+forestSet : {0, 1, 2} partition : {{0, 2}}
+root -> nodeID : 1 childRoot -> nodeID : 2 vertex : 2 dpKey : (1, ({0, 1, 2}, {{0, 2}}))
+dpKey : (1, ({0, 1, 2}, {{0, 2}})) dp[dpKey] : 1000000000000000000
+dpKey : (8, ({0, 1, 2}, {{0, 2}})) dp[dpKey] : 1000000000000000000
+--------
+root: Parent Node ID: 4
+nodeID: 8
+niceNodeType: Edge
+edge: (2, 1)
+bag: [1, 2, 0]
+forestSet : {0, 1, 2} partition : {{0}}
+--------
+root: Parent Node ID: 8
+nodeID: 1
+niceNodeType: Introduce
+vertex: 2
+bag: [1, 2, 0]
+forestSet : {0, 1, 2} partition : {{0}}
+root -> nodeID : 1 childRoot -> nodeID : 2 vertex : 2 dpKey : (1, ({0, 1, 2}, {{0}}))
+dpKey : (1, ({0, 1, 2}, {{0}})) dp[dpKey] : 1000000000000000000
+dpKey : (8, ({0, 1, 2}, {{0}})) dp[dpKey] : 1000000000000000000
+--------
+root: Parent Node ID: 4
+nodeID: 8
+niceNodeType: Edge
+edge: (2, 1)
+bag: [1, 2, 0]
+forestSet : {0, 1} partition : {{0}}
+--------
+root: Parent Node ID: 8
+nodeID: 1
+niceNodeType: Introduce
+vertex: 2
+bag: [1, 2, 0]
+forestSet : {0, 1} partition : {{0}}
+root -> nodeID : 1 childRoot -> nodeID : 2 vertex : 2 dpKey : (1, ({0, 1}, {{0}}))
+dpKey : (1, ({0, 1}, {{0}})) dp[dpKey] : 1000000000000000000
+dpKey : (8, ({0, 1}, {{0}})) dp[dpKey] : 1000000000000000000
+dpKey : (4, ({0, 1}, {{0}})) dp[dpKey] : 1000000000000000000
+dpKey : (0, ({0, 1}, {{0}})) dp[dpKey] : 1000000000000000000
+dpKey : (7, ({0, 1}, {{0}})) dp[dpKey] : 1000000000000000000
+--------
+root: Parent Node ID: 5
+nodeID: 7
+niceNodeType: Edge
+edge: (1, 0)
+bag: [0, 1]
+forestSet : {0} partition : {{0}}
+--------
+root: Parent Node ID: 7
+nodeID: 0
+niceNodeType: Introduce
+vertex: 0
+bag: [0, 1]
+forestSet : {0} partition : {{0}}
+root -> nodeID : 0 childRoot -> nodeID : 4 vertex : 0 dpKey : (0, ({0}, {{0}}))
+--------
+root: Parent Node ID: 0
+nodeID: 4
+niceNodeType: Forget
+vertex: 2
+bag: [1, 0]
+forestSet : {0} partition : {{0}}
+vertex : 2 tempForestSet : {0, 2} tempPartition : {{0, 2}}
+--------
+root: Parent Node ID: 4
+nodeID: 8
+niceNodeType: Edge
+edge: (2, 1)
+bag: [1, 2, 0]
+forestSet : {0, 2} partition : {{0, 2}}
+--------
+root: Parent Node ID: 8
+nodeID: 1
+niceNodeType: Introduce
+vertex: 2
+bag: [1, 2, 0]
+forestSet : {0, 2} partition : {{0, 2}}
+root -> nodeID : 1 childRoot -> nodeID : 2 vertex : 2 dpKey : (1, ({0, 2}, {{0, 2}}))
+dpKey : (1, ({0, 2}, {{0, 2}})) dp[dpKey] : 1000000000000000000
+dpKey : (8, ({0, 2}, {{0, 2}})) dp[dpKey] : 1000000000000000000
+--------
+root: Parent Node ID: 4
+nodeID: 8
+niceNodeType: Edge
+edge: (2, 1)
+bag: [1, 2, 0]
+forestSet : {0, 2} partition : {{0}}
+--------
+root: Parent Node ID: 8
+nodeID: 1
+niceNodeType: Introduce
+vertex: 2
+bag: [1, 2, 0]
+forestSet : {0, 2} partition : {{0}}
+root -> nodeID : 1 childRoot -> nodeID : 2 vertex : 2 dpKey : (1, ({0, 2}, {{0}}))
+dpKey : (1, ({0, 2}, {{0}})) dp[dpKey] : 1000000000000000000
+dpKey : (8, ({0, 2}, {{0}})) dp[dpKey] : 1000000000000000000
+--------
+root: Parent Node ID: 4
+nodeID: 8
+niceNodeType: Edge
+edge: (2, 1)
+bag: [1, 2, 0]
+forestSet : {0} partition : {{0}}
+--------
+root: Parent Node ID: 8
+nodeID: 1
+niceNodeType: Introduce
+vertex: 2
+bag: [1, 2, 0]
+forestSet : {0} partition : {{0}}
+root -> nodeID : 1 childRoot -> nodeID : 2 vertex : 2 dpKey : (1, ({0}, {{0}}))
+dpKey : (1, ({0}, {{0}})) dp[dpKey] : 1000000000000000000
+dpKey : (8, ({0}, {{0}})) dp[dpKey] : 1000000000000000000
+dpKey : (4, ({0}, {{0}})) dp[dpKey] : 1000000000000000000
+dpKey : (0, ({0}, {{0}})) dp[dpKey] : 1000000000000000000
+dpKey : (7, ({0}, {{0}})) dp[dpKey] : 1000000000000000000
+dpKey : (5, ({0}, {{0}})) dp[dpKey] : 150
+dpKey : (6, ({0}, {{0}})) dp[dpKey] : 150

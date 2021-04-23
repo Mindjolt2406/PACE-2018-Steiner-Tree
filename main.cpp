@@ -54,13 +54,13 @@ int main() {
     set<int> terminals;
 
     readGraph(numNodes, adjNodes, edgeWeight);
-    _;
+
     readTerminals(terminals);
 
     NiceTreeNode::adjNodes = adjNodes;
     NiceTreeNode* root = NiceTreeNode::readInput(numNodes);
-    _;
-    // root -> prettyPrintNiceTree();
+
+    root -> prettyPrintNiceTree();
 
     // Partition::precomputeMaps(5);
     // Max bag size since we add one terminal node

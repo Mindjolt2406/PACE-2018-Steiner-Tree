@@ -1,0 +1,25 @@
+SECTION GRAPH
+NODES 4
+EDGES 3
+E 1 2 100
+E 2 3 50
+E 3 4 30
+END 
+
+SECTION Terminals
+Terminals 2
+T 1
+T 4
+END
+
+SECTION Tree Decomposition
+s td 3 2 3
+b 1 2 3 
+b 2 1 2
+b 3 3 4
+1 2
+1 3
+END
+EOF
+
+// Path of length 4 
