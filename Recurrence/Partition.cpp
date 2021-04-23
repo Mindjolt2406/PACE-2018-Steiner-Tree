@@ -279,7 +279,7 @@ void Partition::precomputeMaps(int n) {
     }
 
     cout << "Partition precompute(): Created Partition Map" << endl;
-    prettyPrintMap();
+    // prettyPrintMap();
 }
 
 void Partition::prettyPrintMap() {

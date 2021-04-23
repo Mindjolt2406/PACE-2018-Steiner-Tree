@@ -1,0 +1,85 @@
+here
+here
+Recurrence::specialTerminal : 0 Recurrence::terminals : {0, 1}
+--------
+root: nodeID: 4
+niceNodeType: Forget
+vertex: 0
+bag: [0]
+root : 0x7f8e09d043f0 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 3
+Parent Node ID: 4
+niceNodeType: Forget
+vertex: 1
+bag: [0]
+root : 0x7f8e09d04370 forestSet : {0} partition : {{0}}
+vertex : 1 tempForestSet : {0, 1} tempPartition : {{0, 1}}
+--------
+root: nodeID: 5
+Parent Node ID: 3
+niceNodeType: Edge
+edge: (1, 0)
+bag: [0, 1]
+root : 0x7f8e09d044c0 forestSet : {0, 1} partition : {{0, 1}}
+--------
+root: nodeID: 0
+Parent Node ID: 5
+niceNodeType: Introduce
+vertex: 1
+bag: [0, 1]
+root : 0x7f8e09d041f0 forestSet : {0, 1} partition : {{0, 1}}
+dpKey : (0, ({0, 1}, {{0, 1}})) dp[dpKey] : 1000000000000000000
+dp[dpKey] : 1000000000000000000 "Edgeeee" : Edgeeee
+dp[dpKey] : 1000000000000000000 dpKey : (5, ({0, 1}, {{0, 1}}))
+dpKey : (5, ({0, 1}, {{0, 1}})) dp[dpKey] : 1000000000000000000
+--------
+root: nodeID: 5
+Parent Node ID: 3
+niceNodeType: Edge
+edge: (1, 0)
+bag: [0, 1]
+root : 0x7f8e09d044c0 forestSet : {0, 1} partition : {{0}, {1}}
+--------
+root: nodeID: 0
+Parent Node ID: 5
+niceNodeType: Introduce
+vertex: 1
+bag: [0, 1]
+root : 0x7f8e09d041f0 forestSet : {0, 1} partition : {{0}, {1}}
+--------
+root: nodeID: 1
+Parent Node ID: 0
+niceNodeType: Introduce
+vertex: 0
+bag: [0]
+root : 0x7f8e09d04270 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 2
+Parent Node ID: 1
+niceNodeType: None
+bag: [0]
+root : 0x7f8e09d04300 forestSet : {0} partition : {{0}}
+forestSet : {0} partition : {{0}}
+dpKey : (2, ({0}, {{0}})) dp[dpKey] : 0
+dpKey : (1, ({0}, {{0}})) dp[dpKey] : 0
+dpKey : (0, ({0, 1}, {{0}, {1}})) dp[dpKey] : 0
+dpKey : (5, ({0, 1}, {{0}, {1}})) dp[dpKey] : 0
+--------
+root: nodeID: 5
+Parent Node ID: 3
+niceNodeType: Edge
+edge: (1, 0)
+bag: [0, 1]
+root : 0x7f8e09d044c0 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 0
+Parent Node ID: 5
+niceNodeType: Introduce
+vertex: 1
+bag: [0, 1]
+root : 0x7f8e09d041f0 forestSet : {0} partition : {{0}}
+dpKey : (0, ({0}, {{0}})) dp[dpKey] : 1000000000000000000
+dpKey : (5, ({0}, {{0}})) dp[dpKey] : 1000000000000000000
+dpKey : (3, ({0}, {{0}})) dp[dpKey] : 0
+dpKey : (4, ({0}, {{0}})) dp[dpKey] : 0

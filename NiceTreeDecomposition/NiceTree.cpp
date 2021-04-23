@@ -168,6 +168,7 @@ NiceTreeNode* NiceTreeNode::readInput(int numNodes) {
 
     calculateDepthNodes(finalRoot);
 
+    // finalRoot -> prettyPrintNiceTree();
     addIntroduceEdgeNodes(numNodes);
 
     cout << "Nice Tree Decomposition Created!" << endl;
@@ -302,8 +303,20 @@ bool NiceTreeNode::isLeaf() {
     return (this -> bag.size() == 1);
 }
 
-ostream& operator <<(ostream &os, NiceTreeNode* niceTreeNode) {
-    os << "(" << (int)niceTreeNode -> nodeID << ", " << NiceTreeNode::niceNodeTypeArr[(int) niceTreeNode -> niceNodeType] << ")";
+ostream& operator <<(ostream &os, NiceTreeNode* root) {
+    os << "(" << (int)root -> nodeID << ", " << NiceTreeNode::niceNodeTypeArr[(int) root -> niceNodeType] << ")";
+    return os;
+}
+
+ostream& operator <<(ostream &os, const NiceTreeNode& root) {
+    if(root.parent != NULL) {
+        os << "Parent Node ID: " << (root.parent) -> nodeID << endl;
+    }
+    os << "nodeID: " << root.nodeID << endl;
+    os << "niceNodeType: " << NiceTreeNode::niceNodeTypeArr[(int)root.niceNodeType] << endl;
+    if(root.niceNodeType == NiceNodeType::EDGE) os << "edge: " << root.edge << endl;
+    if(root.niceNodeType == NiceNodeType::VERTEX || root.niceNodeType == NiceNodeType::FORGET) os << "vertex: " << root.vertex << endl;
+    os << "bag: " << root.bag;
     return os;
 }
 
@@ -328,6 +341,12 @@ E 3 4 1
 E 4 5 1
 E 5 1 1
 END 
+
+SECTION Terminals
+Terminals 2
+T 1
+T 4
+END
 
 SECTION Tree Decomposition
 s td 4 2 5

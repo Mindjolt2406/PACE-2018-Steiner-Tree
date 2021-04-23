@@ -11,22 +11,25 @@ class Recurrence {
     static vector<vector<int> > adjNodes;
     static map<pair<int, int>, int> edgeWeight;
     static set<int> terminals;
+    static int specialTerminal;
 
-    void addOneTerminalAllBags(NiceTreeNode* root);
+    static void addOneTerminalAllBags(NiceTreeNode* root);
 
-    ll computeDP(NiceTreeNode* root, set<int> &forestSet, set<set<int> > &partition);
+    static ll calculateDP(NiceTreeNode* root);
 
-    ll computeLeaf(NiceTreeNode* root, set<int> &forestSet, set<set<int> > &partition);
-    ll computeIntroduceVertex(NiceTreeNode* root, set<int> forestSet, set<set<int> > partition);
-    ll computeIntroduceEdge(NiceTreeNode* root, set<int> &forestSet, set<set<int> > &partition);
-    ll computeForgetVertex(NiceTreeNode* root, set<int> forestSet, set<set<int> > partition);
-    ll computeJoinNode(NiceTreeNode* root, set<int> &forestSet, set<set<int> > &partition);
-    ll computeWeirdNode(NiceTreeNode* root, set<int> &forestSet, set<set<int> > &partition);
+    static ll computeDP(NiceTreeNode* root, set<int> forestSet, set<set<int> > partition);
+
+    static ll computeLeaf(NiceTreeNode* root, set<int> &forestSet, set<set<int> > &partition);
+    static ll computeIntroduceVertex(NiceTreeNode* root, set<int> forestSet, set<set<int> > partition);
+    static ll computeIntroduceEdge(NiceTreeNode* root, set<int> &forestSet, set<set<int> > &partition);
+    static ll computeForgetVertex(NiceTreeNode* root, set<int> forestSet, set<set<int> > partition);
+    static ll computeJoinNode(NiceTreeNode* root, set<int> &forestSet, set<set<int> > &partition);
+    static ll computeWeirdNode(NiceTreeNode* root, set<int> &forestSet, set<set<int> > &partition);
 
     // Helper methods
-    bool removeVertexFromPartition(int vertex, set<set<int> > &partition);
-    bool edgeInSameBlock(pair<int, int> edge, set<set<int> > &partition, set<int> &tempBlock);
-    void buildSetForEdgePartition(vector<int> &tempBlockList, set<int> &blockA, set<int> &blockB, int mask);
+    static bool removeVertexFromPartition(int vertex, set<set<int> > &partition);
+    static bool edgeInSameBlock(pair<int, int> edge, set<set<int> > &partition, set<int> &tempBlock);
+    static void buildSetForEdgePartition(vector<int> &tempBlockList, set<int> &blockA, set<int> &blockB, int mask);
 };
 
 #endif

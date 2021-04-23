@@ -25,7 +25,7 @@ void readGraph(int &numNodes, vector<vector<int> > &adjNodes, map<pair<int, int>
     cin >> endName;
 } 
 
-void readTerminals(vector<int> &terminals) {
+void readTerminals(set<int> &terminals) {
     string sectionName, terminalName, terminalsName, endName;
     int terminalNum;
 
@@ -40,7 +40,7 @@ void readTerminals(vector<int> &terminals) {
         cin >> u;
         u--;
 
-        terminals.push_back(u);
+        terminals.insert(u);
     }
 
     cin >> endName;
@@ -51,24 +51,56 @@ int main() {
     int numNodes;
     vector<vector<int> > adjNodes;
     map<pair<int, int>, int> edgeWeight;
-    vector<int> terminals;
+    set<int> terminals;
 
     readGraph(numNodes, adjNodes, edgeWeight);
+    _;
     readTerminals(terminals);
 
     NiceTreeNode::adjNodes = adjNodes;
     NiceTreeNode* root = NiceTreeNode::readInput(numNodes);
+    _;
     // root -> prettyPrintNiceTree();
 
     // Partition::precomputeMaps(5);
     // Max bag size since we add one terminal node
     Partition::precomputeMaps(NiceTreeNode::treeWidth+2); 
-    t(root -> bag);
+
+    Recurrence::adjNodes = adjNodes;
+    Recurrence::edgeWeight = edgeWeight;
+    Recurrence::terminals = terminals;
+    Recurrence::addOneTerminalAllBags(root);
+    // t(root -> bag);
+    t(Recurrence::specialTerminal, Recurrence::terminals);
+    cout << Recurrence::calculateDP(root) << endl;
     return 0;
 }
 
 /*
-{0, 1, 2, 3}]: 
-([{0}, {1}, {2}, {3}], [{0, 1, 2, 3}]) ([{0}, {1}, {2, 3}], [{0, 1, 2}, {3}]) ([{0}, {1}, {2, 3}], [{0, 1, 3}, {2}]) ([{0}, {1}, {2, 3}], [{0, 2}, {1, 3}]) ([{0}, {1}, {2, 3}], [{0, 3}, {1, 2}]) ([{0}, {1, 2}, {3}], [{0, 1}, {2, 3}]) ([{0}, {1, 2}, {3}], [{0, 1, 3}, {2}]) ([{0}, {1, 2}, {3}], [{0, 2}, {1, 3}]) ([{0}, {1, 2}, {3}], [{0, 2, 3}, {1}]) ([{0}, {1, 2, 3}], [{0, 1}, {2}, {3}]) ([{0}, {1, 2, 3}], [{0, 2}, {1}, {3}]) ([{0}, {1, 2, 3}], [{0, 3}, {1}, {2}]) ([{0}, {1, 3}, {2}], [{0, 1}, {2, 3}]) ([{0}, {1, 3}, {2}], [{0, 1, 2}, {3}]) ([{0}, {1, 3}, {2}], [{0, 1, 2, 3}]) ([{0}, {1, 3}, {2}], [{0, 2, 3}, {1}]) ([{0}, {1, 3}, {2}], [{0, 3}, {1, 2}]) ([{0, 1}, {2}, {3}], [{0, 2}, {1, 3}]) ([{0, 1}, {2}, {3}], [{0, 2, 3}, {1}]) ([{0, 1}, {2}, {3}], [{0, 3}, {1, 2}]) ([{0, 1}, {2, 3}], [{0, 2}, {1}, {3}]) ([{0, 1}, {2, 3}], [{0, 2}, {1, 3}]) ([{0, 1}, {2, 3}], [{0, 3}, {1}, {2}]) ([{0, 1}, {2, 3}], [{0, 3}, {1, 2}]) ([{0, 1, 2}, {3}], [{0, 3}, {1}, {2}]) ([{0, 1, 3}, {2}], [{0, 2}, {1}, {3}]) ([{0, 1, 3}, {2}], [{0, 2, 3}, {1}]) ([{0, 2}, {1}, {3}], [{0, 3}, {1, 2}]) ([{0, 2}, {1, 3}], [{0, 3}, {1}, {2}]) ([{0, 2}, {1, 3}], [{0, 3}, {1, 2}]) 
+SECTION GRAPH
+NODES 5
+EDGES 5
+E 1 2 1
+E 2 3 1
+E 3 4 1
+E 4 5 1
+E 5 1 1
+END 
+
+SECTION Terminals
+Terminals 2
+T 1
+T 4
+END
+
+SECTION Tree Decomposition
+s td 4 2 5
+b 3 1 2
+b 2 1 2 3
+b 1 1 3 4
+b 4 1 4 5
+3 2
+2 1
+4 1
 
 */

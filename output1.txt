@@ -1,0 +1,951 @@
+Recurrence::specialTerminal : 0 Recurrence::terminals : {0, 3}
+--------
+root: nodeID: 15
+niceNodeType: Forget
+vertex: 0
+bag: [0]
+root : 0x7fc3734067a0 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 14
+Parent Node ID: 15
+niceNodeType: Forget
+vertex: 2
+bag: [0]
+root : 0x7fc373406740 forestSet : {0} partition : {{0}}
+vertex : 2 tempForestSet : {0, 2} tempPartition : {{0, 2}}
+--------
+root: nodeID: 13
+Parent Node ID: 14
+niceNodeType: Forget
+vertex: 3
+bag: [0, 2]
+root : 0x7fc3734066e0 forestSet : {0, 2} partition : {{0, 2}}
+vertex : 3 tempForestSet : {0, 2, 3} tempPartition : {{0, 2, 3}}
+--------
+root: nodeID: 18
+Parent Node ID: 13
+niceNodeType: Edge
+edge: (3, 2)
+bag: [0, 2, 3]
+root : 0x7fc3734069c0 forestSet : {0, 2, 3} partition : {{0, 2, 3}}
+--------
+root: nodeID: 2
+Parent Node ID: 18
+niceNodeType: Join
+bag: [0, 2, 3]
+root : 0x7fc373406070 forestSet : {0, 2, 3} partition : {{0, 2, 3}}
+--------
+root: nodeID: 9
+Parent Node ID: 2
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 2, 3]
+root : 0x7fc373406480 forestSet : {0, 2, 3} partition : {{0}, {2}, {3}}
+vertex : 2 partition : {{0}, {2}, {3}}
+partition : {{0}, {3}}
+--------
+root: nodeID: 11
+Parent Node ID: 9
+niceNodeType: Forget
+vertex: 4
+bag: [0, 3]
+root : 0x7fc3734065a0 forestSet : {0, 3} partition : {{0}, {3}}
+vertex : 4 tempForestSet : {0, 3, 4} tempPartition : {{0, 4}, {3}}
+--------
+root: nodeID: 19
+Parent Node ID: 11
+niceNodeType: Edge
+edge: (4, 3)
+bag: [0, 3, 4]
+root : 0x7fc373406a50 forestSet : {0, 3, 4} partition : {{0, 4}, {3}}
+--------
+root: nodeID: 20
+Parent Node ID: 19
+niceNodeType: Edge
+edge: (4, 0)
+bag: [0, 3, 4]
+root : 0x7fc373406ac0 forestSet : {0, 3, 4} partition : {{0, 4}, {3}}
+--------
+root: nodeID: 3
+Parent Node ID: 20
+niceNodeType: Introduce
+vertex: 4
+bag: [0, 3, 4]
+root : 0x7fc3734060e0 forestSet : {0, 3, 4} partition : {{0, 4}, {3}}
+vertex : 4 partition : {{0, 4}, {3}}
+partition : {{0}, {3}}
+--------
+root: nodeID: 6
+Parent Node ID: 3
+niceNodeType: Introduce
+vertex: 3
+bag: [0, 3]
+root : 0x7fc373406300 forestSet : {0, 3} partition : {{0}, {3}}
+vertex : 3 partition : {{0}, {3}}
+partition : {{0}}
+--------
+root: nodeID: 7
+Parent Node ID: 6
+niceNodeType: Introduce
+vertex: 0
+bag: [0]
+root : 0x7fc3734063a0 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 8
+Parent Node ID: 7
+niceNodeType: None
+bag: [0]
+root : 0x7fc373406410 forestSet : {0} partition : {{0}}
+forestSet : {0} partition : {{0}}
+here
+dp[dpKey] : 1 dpKey : (20, ({0, 3, 4}, {{0, 4}, {3}}))
+vertex : 4 tempForestSet : {0, 3, 4} tempPartition : {{0}, {3, 4}}
+--------
+root: nodeID: 19
+Parent Node ID: 11
+niceNodeType: Edge
+edge: (4, 3)
+bag: [0, 3, 4]
+root : 0x7fc373406a50 forestSet : {0, 3, 4} partition : {{0}, {3, 4}}
+--------
+root: nodeID: 20
+Parent Node ID: 19
+niceNodeType: Edge
+edge: (4, 0)
+bag: [0, 3, 4]
+root : 0x7fc373406ac0 forestSet : {0, 3, 4} partition : {{0}, {3, 4}}
+--------
+root: nodeID: 3
+Parent Node ID: 20
+niceNodeType: Introduce
+vertex: 4
+bag: [0, 3, 4]
+root : 0x7fc3734060e0 forestSet : {0, 3, 4} partition : {{0}, {3, 4}}
+vertex : 4 partition : {{0}, {3, 4}}
+partition : {{0}, {3}}
+--------
+root: nodeID: 6
+Parent Node ID: 3
+niceNodeType: Introduce
+vertex: 3
+bag: [0, 3]
+root : 0x7fc373406300 forestSet : {0, 3} partition : {{0}, {3}}
+dp[dpKey] : 1 dpKey : (19, ({0, 3, 4}, {{0}, {3, 4}}))
+--------
+root: nodeID: 19
+Parent Node ID: 11
+niceNodeType: Edge
+edge: (4, 3)
+bag: [0, 3, 4]
+root : 0x7fc373406a50 forestSet : {0, 3, 4} partition : {{0}, {3}, {4}}
+--------
+root: nodeID: 20
+Parent Node ID: 19
+niceNodeType: Edge
+edge: (4, 0)
+bag: [0, 3, 4]
+root : 0x7fc373406ac0 forestSet : {0, 3, 4} partition : {{0}, {3}, {4}}
+--------
+root: nodeID: 3
+Parent Node ID: 20
+niceNodeType: Introduce
+vertex: 4
+bag: [0, 3, 4]
+root : 0x7fc3734060e0 forestSet : {0, 3, 4} partition : {{0}, {3}, {4}}
+vertex : 4 partition : {{0}, {3}, {4}}
+partition : {{0}, {3}}
+--------
+root: nodeID: 6
+Parent Node ID: 3
+niceNodeType: Introduce
+vertex: 3
+bag: [0, 3]
+root : 0x7fc373406300 forestSet : {0, 3} partition : {{0}, {3}}
+--------
+root: nodeID: 19
+Parent Node ID: 11
+niceNodeType: Edge
+edge: (4, 3)
+bag: [0, 3, 4]
+root : 0x7fc373406a50 forestSet : {0, 3} partition : {{0}, {3}}
+--------
+root: nodeID: 20
+Parent Node ID: 19
+niceNodeType: Edge
+edge: (4, 0)
+bag: [0, 3, 4]
+root : 0x7fc373406ac0 forestSet : {0, 3} partition : {{0}, {3}}
+--------
+root: nodeID: 3
+Parent Node ID: 20
+niceNodeType: Introduce
+vertex: 4
+bag: [0, 3, 4]
+root : 0x7fc3734060e0 forestSet : {0, 3} partition : {{0}, {3}}
+--------
+root: nodeID: 6
+Parent Node ID: 3
+niceNodeType: Introduce
+vertex: 3
+bag: [0, 3]
+root : 0x7fc373406300 forestSet : {0, 3} partition : {{0}, {3}}
+--------
+root: nodeID: 10
+Parent Node ID: 2
+niceNodeType: Introduce
+vertex: 3
+bag: [0, 2, 3]
+root : 0x7fc3734064e0 forestSet : {0, 2, 3} partition : {{0, 2, 3}}
+vertex : 3 partition : {{0, 2, 3}}
+partition : {{0, 2}}
+--------
+root: nodeID: 12
+Parent Node ID: 10
+niceNodeType: Forget
+vertex: 1
+bag: [0, 2]
+root : 0x7fc373406660 forestSet : {0, 2} partition : {{0, 2}}
+vertex : 1 tempForestSet : {0, 1, 2} tempPartition : {{0, 1, 2}}
+--------
+root: nodeID: 16
+Parent Node ID: 12
+niceNodeType: Edge
+edge: (1, 0)
+bag: [0, 1, 2]
+root : 0x7fc3734068f0 forestSet : {0, 1, 2} partition : {{0, 1, 2}}
+--------
+root: nodeID: 17
+Parent Node ID: 16
+niceNodeType: Edge
+edge: (1, 2)
+bag: [0, 1, 2]
+root : 0x7fc373406950 forestSet : {0, 1, 2} partition : {{0, 1, 2}}
+--------
+root: nodeID: 1
+Parent Node ID: 17
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 1, 2]
+root : 0x7fc373406000 forestSet : {0, 1, 2} partition : {{0, 1, 2}}
+vertex : 2 partition : {{0, 1, 2}}
+partition : {{0, 1}}
+--------
+root: nodeID: 0
+Parent Node ID: 1
+niceNodeType: Introduce
+vertex: 1
+bag: [0, 1]
+root : 0x7fc373405f90 forestSet : {0, 1} partition : {{0, 1}}
+vertex : 1 partition : {{0, 1}}
+partition : {{0}}
+--------
+root: nodeID: 4
+Parent Node ID: 0
+niceNodeType: Introduce
+vertex: 0
+bag: [0]
+root : 0x7fc373406200 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 5
+Parent Node ID: 4
+niceNodeType: None
+bag: [0]
+root : 0x7fc373406290 forestSet : {0} partition : {{0}}
+forestSet : {0} partition : {{0}}
+here
+dp[dpKey] : 1 dpKey : (17, ({0, 1, 2}, {{0, 1, 2}}))
+dp[dpKey] : 1 dpKey : (16, ({0, 1, 2}, {{0, 1, 2}}))
+--------
+root: nodeID: 16
+Parent Node ID: 12
+niceNodeType: Edge
+edge: (1, 0)
+bag: [0, 1, 2]
+root : 0x7fc3734068f0 forestSet : {0, 1, 2} partition : {{0, 2}, {1}}
+--------
+root: nodeID: 17
+Parent Node ID: 16
+niceNodeType: Edge
+edge: (1, 2)
+bag: [0, 1, 2]
+root : 0x7fc373406950 forestSet : {0, 1, 2} partition : {{0, 2}, {1}}
+--------
+root: nodeID: 1
+Parent Node ID: 17
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 1, 2]
+root : 0x7fc373406000 forestSet : {0, 1, 2} partition : {{0, 2}, {1}}
+vertex : 2 partition : {{0, 2}, {1}}
+partition : {{0}, {1}}
+--------
+root: nodeID: 0
+Parent Node ID: 1
+niceNodeType: Introduce
+vertex: 1
+bag: [0, 1]
+root : 0x7fc373405f90 forestSet : {0, 1} partition : {{0}, {1}}
+vertex : 1 partition : {{0}, {1}}
+partition : {{0}}
+--------
+root: nodeID: 4
+Parent Node ID: 0
+niceNodeType: Introduce
+vertex: 0
+bag: [0]
+root : 0x7fc373406200 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 16
+Parent Node ID: 12
+niceNodeType: Edge
+edge: (1, 0)
+bag: [0, 1, 2]
+root : 0x7fc3734068f0 forestSet : {0, 2} partition : {{0, 2}}
+--------
+root: nodeID: 17
+Parent Node ID: 16
+niceNodeType: Edge
+edge: (1, 2)
+bag: [0, 1, 2]
+root : 0x7fc373406950 forestSet : {0, 2} partition : {{0, 2}}
+--------
+root: nodeID: 1
+Parent Node ID: 17
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 1, 2]
+root : 0x7fc373406000 forestSet : {0, 2} partition : {{0, 2}}
+vertex : 2 partition : {{0, 2}}
+partition : {{0}}
+--------
+root: nodeID: 0
+Parent Node ID: 1
+niceNodeType: Introduce
+vertex: 1
+bag: [0, 1]
+root : 0x7fc373405f90 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 4
+Parent Node ID: 0
+niceNodeType: Introduce
+vertex: 0
+bag: [0]
+root : 0x7fc373406200 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 9
+Parent Node ID: 2
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 2, 3]
+root : 0x7fc373406480 forestSet : {0, 2, 3} partition : {{0}, {2, 3}}
+vertex : 2 partition : {{0}, {2, 3}}
+partition : {{0}, {3}}
+--------
+root: nodeID: 11
+Parent Node ID: 9
+niceNodeType: Forget
+vertex: 4
+bag: [0, 3]
+root : 0x7fc3734065a0 forestSet : {0, 3} partition : {{0}, {3}}
+--------
+root: nodeID: 10
+Parent Node ID: 2
+niceNodeType: Introduce
+vertex: 3
+bag: [0, 2, 3]
+root : 0x7fc3734064e0 forestSet : {0, 2, 3} partition : {{0, 2}, {3}}
+vertex : 3 partition : {{0, 2}, {3}}
+partition : {{0, 2}}
+--------
+root: nodeID: 12
+Parent Node ID: 10
+niceNodeType: Forget
+vertex: 1
+bag: [0, 2]
+root : 0x7fc373406660 forestSet : {0, 2} partition : {{0, 2}}
+--------
+root: nodeID: 9
+Parent Node ID: 2
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 2, 3]
+root : 0x7fc373406480 forestSet : {0, 2, 3} partition : {{0}, {2, 3}}
+--------
+root: nodeID: 10
+Parent Node ID: 2
+niceNodeType: Introduce
+vertex: 3
+bag: [0, 2, 3]
+root : 0x7fc3734064e0 forestSet : {0, 2, 3} partition : {{0, 3}, {2}}
+vertex : 3 partition : {{0, 3}, {2}}
+partition : {{0}, {2}}
+--------
+root: nodeID: 12
+Parent Node ID: 10
+niceNodeType: Forget
+vertex: 1
+bag: [0, 2]
+root : 0x7fc373406660 forestSet : {0, 2} partition : {{0}, {2}}
+vertex : 1 tempForestSet : {0, 1, 2} tempPartition : {{0, 1}, {2}}
+--------
+root: nodeID: 16
+Parent Node ID: 12
+niceNodeType: Edge
+edge: (1, 0)
+bag: [0, 1, 2]
+root : 0x7fc3734068f0 forestSet : {0, 1, 2} partition : {{0, 1}, {2}}
+--------
+root: nodeID: 17
+Parent Node ID: 16
+niceNodeType: Edge
+edge: (1, 2)
+bag: [0, 1, 2]
+root : 0x7fc373406950 forestSet : {0, 1, 2} partition : {{0, 1}, {2}}
+--------
+root: nodeID: 1
+Parent Node ID: 17
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 1, 2]
+root : 0x7fc373406000 forestSet : {0, 1, 2} partition : {{0, 1}, {2}}
+vertex : 2 partition : {{0, 1}, {2}}
+partition : {{0, 1}}
+--------
+root: nodeID: 0
+Parent Node ID: 1
+niceNodeType: Introduce
+vertex: 1
+bag: [0, 1]
+root : 0x7fc373405f90 forestSet : {0, 1} partition : {{0, 1}}
+dp[dpKey] : 1 dpKey : (16, ({0, 1, 2}, {{0, 1}, {2}}))
+vertex : 1 tempForestSet : {0, 1, 2} tempPartition : {{0}, {1, 2}}
+--------
+root: nodeID: 16
+Parent Node ID: 12
+niceNodeType: Edge
+edge: (1, 0)
+bag: [0, 1, 2]
+root : 0x7fc3734068f0 forestSet : {0, 1, 2} partition : {{0}, {1, 2}}
+--------
+root: nodeID: 17
+Parent Node ID: 16
+niceNodeType: Edge
+edge: (1, 2)
+bag: [0, 1, 2]
+root : 0x7fc373406950 forestSet : {0, 1, 2} partition : {{0}, {1, 2}}
+--------
+root: nodeID: 1
+Parent Node ID: 17
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 1, 2]
+root : 0x7fc373406000 forestSet : {0, 1, 2} partition : {{0}, {1, 2}}
+vertex : 2 partition : {{0}, {1, 2}}
+partition : {{0}, {1}}
+--------
+root: nodeID: 0
+Parent Node ID: 1
+niceNodeType: Introduce
+vertex: 1
+bag: [0, 1]
+root : 0x7fc373405f90 forestSet : {0, 1} partition : {{0}, {1}}
+dp[dpKey] : 1 dpKey : (17, ({0, 1, 2}, {{0}, {1, 2}}))
+--------
+root: nodeID: 16
+Parent Node ID: 12
+niceNodeType: Edge
+edge: (1, 0)
+bag: [0, 1, 2]
+root : 0x7fc3734068f0 forestSet : {0, 1, 2} partition : {{0}, {1}, {2}}
+--------
+root: nodeID: 17
+Parent Node ID: 16
+niceNodeType: Edge
+edge: (1, 2)
+bag: [0, 1, 2]
+root : 0x7fc373406950 forestSet : {0, 1, 2} partition : {{0}, {1}, {2}}
+--------
+root: nodeID: 1
+Parent Node ID: 17
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 1, 2]
+root : 0x7fc373406000 forestSet : {0, 1, 2} partition : {{0}, {1}, {2}}
+vertex : 2 partition : {{0}, {1}, {2}}
+partition : {{0}, {1}}
+--------
+root: nodeID: 0
+Parent Node ID: 1
+niceNodeType: Introduce
+vertex: 1
+bag: [0, 1]
+root : 0x7fc373405f90 forestSet : {0, 1} partition : {{0}, {1}}
+--------
+root: nodeID: 16
+Parent Node ID: 12
+niceNodeType: Edge
+edge: (1, 0)
+bag: [0, 1, 2]
+root : 0x7fc3734068f0 forestSet : {0, 2} partition : {{0}, {2}}
+--------
+root: nodeID: 17
+Parent Node ID: 16
+niceNodeType: Edge
+edge: (1, 2)
+bag: [0, 1, 2]
+root : 0x7fc373406950 forestSet : {0, 2} partition : {{0}, {2}}
+--------
+root: nodeID: 1
+Parent Node ID: 17
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 1, 2]
+root : 0x7fc373406000 forestSet : {0, 2} partition : {{0}, {2}}
+vertex : 2 partition : {{0}, {2}}
+partition : {{0}}
+--------
+root: nodeID: 0
+Parent Node ID: 1
+niceNodeType: Introduce
+vertex: 1
+bag: [0, 1]
+root : 0x7fc373405f90 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 9
+Parent Node ID: 2
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 2, 3]
+root : 0x7fc373406480 forestSet : {0, 2, 3} partition : {{0, 2}, {3}}
+vertex : 2 partition : {{0, 2}, {3}}
+partition : {{0}, {3}}
+--------
+root: nodeID: 11
+Parent Node ID: 9
+niceNodeType: Forget
+vertex: 4
+bag: [0, 3]
+root : 0x7fc3734065a0 forestSet : {0, 3} partition : {{0}, {3}}
+--------
+root: nodeID: 10
+Parent Node ID: 2
+niceNodeType: Introduce
+vertex: 3
+bag: [0, 2, 3]
+root : 0x7fc3734064e0 forestSet : {0, 2, 3} partition : {{0, 3}, {2}}
+dp[dpKey] : 2 dpKey : (18, ({0, 2, 3}, {{0, 2, 3}}))
+--------
+root: nodeID: 18
+Parent Node ID: 13
+niceNodeType: Edge
+edge: (3, 2)
+bag: [0, 2, 3]
+root : 0x7fc3734069c0 forestSet : {0, 2, 3} partition : {{0, 2}, {3}}
+--------
+root: nodeID: 2
+Parent Node ID: 18
+niceNodeType: Join
+bag: [0, 2, 3]
+root : 0x7fc373406070 forestSet : {0, 2, 3} partition : {{0, 2}, {3}}
+--------
+root: nodeID: 9
+Parent Node ID: 2
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 2, 3]
+root : 0x7fc373406480 forestSet : {0, 2, 3} partition : {{0}, {2}, {3}}
+--------
+root: nodeID: 10
+Parent Node ID: 2
+niceNodeType: Introduce
+vertex: 3
+bag: [0, 2, 3]
+root : 0x7fc3734064e0 forestSet : {0, 2, 3} partition : {{0, 2}, {3}}
+--------
+root: nodeID: 18
+Parent Node ID: 13
+niceNodeType: Edge
+edge: (3, 2)
+bag: [0, 2, 3]
+root : 0x7fc3734069c0 forestSet : {0, 2} partition : {{0, 2}}
+--------
+root: nodeID: 2
+Parent Node ID: 18
+niceNodeType: Join
+bag: [0, 2, 3]
+root : 0x7fc373406070 forestSet : {0, 2} partition : {{0, 2}}
+--------
+root: nodeID: 9
+Parent Node ID: 2
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 2, 3]
+root : 0x7fc373406480 forestSet : {0, 2} partition : {{0}, {2}}
+vertex : 2 partition : {{0}, {2}}
+partition : {{0}}
+--------
+root: nodeID: 11
+Parent Node ID: 9
+niceNodeType: Forget
+vertex: 4
+bag: [0, 3]
+root : 0x7fc3734065a0 forestSet : {0} partition : {{0}}
+vertex : 4 tempForestSet : {0, 4} tempPartition : {{0, 4}}
+--------
+root: nodeID: 19
+Parent Node ID: 11
+niceNodeType: Edge
+edge: (4, 3)
+bag: [0, 3, 4]
+root : 0x7fc373406a50 forestSet : {0, 4} partition : {{0, 4}}
+--------
+root: nodeID: 20
+Parent Node ID: 19
+niceNodeType: Edge
+edge: (4, 0)
+bag: [0, 3, 4]
+root : 0x7fc373406ac0 forestSet : {0, 4} partition : {{0, 4}}
+--------
+root: nodeID: 3
+Parent Node ID: 20
+niceNodeType: Introduce
+vertex: 4
+bag: [0, 3, 4]
+root : 0x7fc3734060e0 forestSet : {0, 4} partition : {{0, 4}}
+vertex : 4 partition : {{0, 4}}
+partition : {{0}}
+--------
+root: nodeID: 6
+Parent Node ID: 3
+niceNodeType: Introduce
+vertex: 3
+bag: [0, 3]
+root : 0x7fc373406300 forestSet : {0} partition : {{0}}
+dp[dpKey] : 1000000000000000000 dpKey : (20, ({0, 4}, {{0, 4}}))
+--------
+root: nodeID: 19
+Parent Node ID: 11
+niceNodeType: Edge
+edge: (4, 3)
+bag: [0, 3, 4]
+root : 0x7fc373406a50 forestSet : {0, 4} partition : {{0}, {4}}
+--------
+root: nodeID: 20
+Parent Node ID: 19
+niceNodeType: Edge
+edge: (4, 0)
+bag: [0, 3, 4]
+root : 0x7fc373406ac0 forestSet : {0, 4} partition : {{0}, {4}}
+--------
+root: nodeID: 3
+Parent Node ID: 20
+niceNodeType: Introduce
+vertex: 4
+bag: [0, 3, 4]
+root : 0x7fc3734060e0 forestSet : {0, 4} partition : {{0}, {4}}
+vertex : 4 partition : {{0}, {4}}
+partition : {{0}}
+--------
+root: nodeID: 6
+Parent Node ID: 3
+niceNodeType: Introduce
+vertex: 3
+bag: [0, 3]
+root : 0x7fc373406300 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 19
+Parent Node ID: 11
+niceNodeType: Edge
+edge: (4, 3)
+bag: [0, 3, 4]
+root : 0x7fc373406a50 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 20
+Parent Node ID: 19
+niceNodeType: Edge
+edge: (4, 0)
+bag: [0, 3, 4]
+root : 0x7fc373406ac0 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 3
+Parent Node ID: 20
+niceNodeType: Introduce
+vertex: 4
+bag: [0, 3, 4]
+root : 0x7fc3734060e0 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 6
+Parent Node ID: 3
+niceNodeType: Introduce
+vertex: 3
+bag: [0, 3]
+root : 0x7fc373406300 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 10
+Parent Node ID: 2
+niceNodeType: Introduce
+vertex: 3
+bag: [0, 2, 3]
+root : 0x7fc3734064e0 forestSet : {0, 2} partition : {{0, 2}}
+--------
+root: nodeID: 13
+Parent Node ID: 14
+niceNodeType: Forget
+vertex: 3
+bag: [0, 2]
+root : 0x7fc3734066e0 forestSet : {0, 2} partition : {{0}, {2}}
+vertex : 3 tempForestSet : {0, 2, 3} tempPartition : {{0, 3}, {2}}
+--------
+root: nodeID: 18
+Parent Node ID: 13
+niceNodeType: Edge
+edge: (3, 2)
+bag: [0, 2, 3]
+root : 0x7fc3734069c0 forestSet : {0, 2, 3} partition : {{0, 3}, {2}}
+--------
+root: nodeID: 2
+Parent Node ID: 18
+niceNodeType: Join
+bag: [0, 2, 3]
+root : 0x7fc373406070 forestSet : {0, 2, 3} partition : {{0, 3}, {2}}
+--------
+root: nodeID: 9
+Parent Node ID: 2
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 2, 3]
+root : 0x7fc373406480 forestSet : {0, 2, 3} partition : {{0}, {2}, {3}}
+--------
+root: nodeID: 10
+Parent Node ID: 2
+niceNodeType: Introduce
+vertex: 3
+bag: [0, 2, 3]
+root : 0x7fc3734064e0 forestSet : {0, 2, 3} partition : {{0, 3}, {2}}
+vertex : 3 tempForestSet : {0, 2, 3} tempPartition : {{0}, {2, 3}}
+--------
+root: nodeID: 18
+Parent Node ID: 13
+niceNodeType: Edge
+edge: (3, 2)
+bag: [0, 2, 3]
+root : 0x7fc3734069c0 forestSet : {0, 2, 3} partition : {{0}, {2, 3}}
+--------
+root: nodeID: 2
+Parent Node ID: 18
+niceNodeType: Join
+bag: [0, 2, 3]
+root : 0x7fc373406070 forestSet : {0, 2, 3} partition : {{0}, {2, 3}}
+--------
+root: nodeID: 9
+Parent Node ID: 2
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 2, 3]
+root : 0x7fc373406480 forestSet : {0, 2, 3} partition : {{0}, {2}, {3}}
+--------
+root: nodeID: 10
+Parent Node ID: 2
+niceNodeType: Introduce
+vertex: 3
+bag: [0, 2, 3]
+root : 0x7fc3734064e0 forestSet : {0, 2, 3} partition : {{0}, {2, 3}}
+vertex : 3 partition : {{0}, {2, 3}}
+partition : {{0}, {2}}
+--------
+root: nodeID: 12
+Parent Node ID: 10
+niceNodeType: Forget
+vertex: 1
+bag: [0, 2]
+root : 0x7fc373406660 forestSet : {0, 2} partition : {{0}, {2}}
+dp[dpKey] : 2 dpKey : (18, ({0, 2, 3}, {{0}, {2, 3}}))
+--------
+root: nodeID: 18
+Parent Node ID: 13
+niceNodeType: Edge
+edge: (3, 2)
+bag: [0, 2, 3]
+root : 0x7fc3734069c0 forestSet : {0, 2, 3} partition : {{0}, {2}, {3}}
+--------
+root: nodeID: 2
+Parent Node ID: 18
+niceNodeType: Join
+bag: [0, 2, 3]
+root : 0x7fc373406070 forestSet : {0, 2, 3} partition : {{0}, {2}, {3}}
+--------
+root: nodeID: 18
+Parent Node ID: 13
+niceNodeType: Edge
+edge: (3, 2)
+bag: [0, 2, 3]
+root : 0x7fc3734069c0 forestSet : {0, 2} partition : {{0}, {2}}
+--------
+root: nodeID: 2
+Parent Node ID: 18
+niceNodeType: Join
+bag: [0, 2, 3]
+root : 0x7fc373406070 forestSet : {0, 2} partition : {{0}, {2}}
+--------
+root: nodeID: 13
+Parent Node ID: 14
+niceNodeType: Forget
+vertex: 3
+bag: [0, 2]
+root : 0x7fc3734066e0 forestSet : {0} partition : {{0}}
+vertex : 3 tempForestSet : {0, 3} tempPartition : {{0, 3}}
+--------
+root: nodeID: 18
+Parent Node ID: 13
+niceNodeType: Edge
+edge: (3, 2)
+bag: [0, 2, 3]
+root : 0x7fc3734069c0 forestSet : {0, 3} partition : {{0, 3}}
+--------
+root: nodeID: 2
+Parent Node ID: 18
+niceNodeType: Join
+bag: [0, 2, 3]
+root : 0x7fc373406070 forestSet : {0, 3} partition : {{0, 3}}
+--------
+root: nodeID: 9
+Parent Node ID: 2
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 2, 3]
+root : 0x7fc373406480 forestSet : {0, 3} partition : {{0}, {3}}
+--------
+root: nodeID: 11
+Parent Node ID: 9
+niceNodeType: Forget
+vertex: 4
+bag: [0, 3]
+root : 0x7fc3734065a0 forestSet : {0, 3} partition : {{0}, {3}}
+--------
+root: nodeID: 10
+Parent Node ID: 2
+niceNodeType: Introduce
+vertex: 3
+bag: [0, 2, 3]
+root : 0x7fc3734064e0 forestSet : {0, 3} partition : {{0, 3}}
+vertex : 3 partition : {{0, 3}}
+partition : {{0}}
+--------
+root: nodeID: 12
+Parent Node ID: 10
+niceNodeType: Forget
+vertex: 1
+bag: [0, 2]
+root : 0x7fc373406660 forestSet : {0} partition : {{0}}
+vertex : 1 tempForestSet : {0, 1} tempPartition : {{0, 1}}
+--------
+root: nodeID: 16
+Parent Node ID: 12
+niceNodeType: Edge
+edge: (1, 0)
+bag: [0, 1, 2]
+root : 0x7fc3734068f0 forestSet : {0, 1} partition : {{0, 1}}
+--------
+root: nodeID: 17
+Parent Node ID: 16
+niceNodeType: Edge
+edge: (1, 2)
+bag: [0, 1, 2]
+root : 0x7fc373406950 forestSet : {0, 1} partition : {{0, 1}}
+--------
+root: nodeID: 1
+Parent Node ID: 17
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 1, 2]
+root : 0x7fc373406000 forestSet : {0, 1} partition : {{0, 1}}
+--------
+root: nodeID: 0
+Parent Node ID: 1
+niceNodeType: Introduce
+vertex: 1
+bag: [0, 1]
+root : 0x7fc373405f90 forestSet : {0, 1} partition : {{0, 1}}
+dp[dpKey] : 1 dpKey : (16, ({0, 1}, {{0, 1}}))
+--------
+root: nodeID: 16
+Parent Node ID: 12
+niceNodeType: Edge
+edge: (1, 0)
+bag: [0, 1, 2]
+root : 0x7fc3734068f0 forestSet : {0, 1} partition : {{0}, {1}}
+--------
+root: nodeID: 17
+Parent Node ID: 16
+niceNodeType: Edge
+edge: (1, 2)
+bag: [0, 1, 2]
+root : 0x7fc373406950 forestSet : {0, 1} partition : {{0}, {1}}
+--------
+root: nodeID: 1
+Parent Node ID: 17
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 1, 2]
+root : 0x7fc373406000 forestSet : {0, 1} partition : {{0}, {1}}
+--------
+root: nodeID: 0
+Parent Node ID: 1
+niceNodeType: Introduce
+vertex: 1
+bag: [0, 1]
+root : 0x7fc373405f90 forestSet : {0, 1} partition : {{0}, {1}}
+--------
+root: nodeID: 16
+Parent Node ID: 12
+niceNodeType: Edge
+edge: (1, 0)
+bag: [0, 1, 2]
+root : 0x7fc3734068f0 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 17
+Parent Node ID: 16
+niceNodeType: Edge
+edge: (1, 2)
+bag: [0, 1, 2]
+root : 0x7fc373406950 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 1
+Parent Node ID: 17
+niceNodeType: Introduce
+vertex: 2
+bag: [0, 1, 2]
+root : 0x7fc373406000 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 0
+Parent Node ID: 1
+niceNodeType: Introduce
+vertex: 1
+bag: [0, 1]
+root : 0x7fc373405f90 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 18
+Parent Node ID: 13
+niceNodeType: Edge
+edge: (3, 2)
+bag: [0, 2, 3]
+root : 0x7fc3734069c0 forestSet : {0, 3} partition : {{0}, {3}}
+--------
+root: nodeID: 2
+Parent Node ID: 18
+niceNodeType: Join
+bag: [0, 2, 3]
+root : 0x7fc373406070 forestSet : {0, 3} partition : {{0}, {3}}
+--------
+root: nodeID: 18
+Parent Node ID: 13
+niceNodeType: Edge
+edge: (3, 2)
+bag: [0, 2, 3]
+root : 0x7fc3734069c0 forestSet : {0} partition : {{0}}
+--------
+root: nodeID: 2
+Parent Node ID: 18
+niceNodeType: Join
+bag: [0, 2, 3]
+root : 0x7fc373406070 forestSet : {0} partition : {{0}}
