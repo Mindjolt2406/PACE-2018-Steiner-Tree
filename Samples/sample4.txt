@@ -21,3 +21,4 @@ END
 EOF
 
 // Path of length 2
+// Answer: 150

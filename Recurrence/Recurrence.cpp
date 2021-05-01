@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 #include "Recurrence.hpp"
 #include "Partition.hpp"
+// #define DEBUG
 
 void Recurrence::addOneTerminalAllBags(NiceTreeNode* root) {
     specialTerminal = *terminals.begin();
@@ -14,22 +15,28 @@ void Recurrence::addOneTerminalAllBags(NiceTreeNode* root) {
 }
 
 ll Recurrence::computeDP(NiceTreeNode* root, set<int> forestSet, set<set<int> > partition) {
-    cerr << "--------" << endl;
-    cerr << "root: " << *root << endl;
-    t(forestSet, partition);
+    #ifdef DEBUG
+        cerr << "--------" << endl;
+        cerr << "root: " << *root << endl;
+        t(forestSet, partition);
+    #endif
     // Corresponding DP Key - {t, X, P}
     auto dpKey = make_pair(root -> nodeID, make_pair(forestSet, partition));
 
     // Check if node is already computed and return if so
     if(dp.count(dpKey)) {
+        #ifdef DEBUG
         t("computed", dpKey, dp[dpKey]);
+        #endif
         return dp[dpKey];
     }
 
     // Base Condition - Leaf Node
     if(root -> niceNodeType == NiceNodeType::NONE) {
         dp[dpKey] = computeLeaf(root, forestSet, partition);
-        t(dpKey, dp[dpKey]);
+        #ifdef DEBUG
+            t(dpKey, dp[dpKey]);
+        #endif
         return dp[dpKey];
     } 
 
@@ -38,7 +45,9 @@ ll Recurrence::computeDP(NiceTreeNode* root, set<int> forestSet, set<set<int> > 
     // Introduce Vertex
     if(root -> niceNodeType == NiceNodeType::VERTEX) {
         dp[dpKey] = computeIntroduceVertex(root, forestSet, partition);
-        t(dpKey, dp[dpKey]);
+        #ifdef DEBUG
+            t(dpKey, dp[dpKey]);
+        #endif
         return dp[dpKey];
     }
 
@@ -46,25 +55,33 @@ ll Recurrence::computeDP(NiceTreeNode* root, set<int> forestSet, set<set<int> > 
     // Introduce Edge
     if(root -> niceNodeType == NiceNodeType::EDGE) {
         dp[dpKey] = computeIntroduceEdge(root, forestSet, partition);
-        t(dpKey, dp[dpKey]);
+        #ifdef DEBUG
+            t(dpKey, dp[dpKey]);
+        #endif
         return dp[dpKey];
     }
 
     // Forget Node
     if(root -> niceNodeType == NiceNodeType::FORGET) {
         dp[dpKey] = computeForgetVertex(root, forestSet, partition);
-        t(dpKey, dp[dpKey]);
+        #ifdef DEBUG
+            t(dpKey, dp[dpKey]);
+        #endif
         return dp[dpKey];
     }
 
     // Join Node
     if(root -> niceNodeType == NiceNodeType::JOIN) {
         dp[dpKey] = computeJoinNode(root, forestSet, partition);
-        t(dpKey, dp[dpKey]);
+        #ifdef DEBUG
+            t(dpKey, dp[dpKey]);
+        #endif
         return dp[dpKey];
     } else { // Weird Node
         dp[dpKey] = computeWeirdNode(root, forestSet, partition);
-        t(dpKey, dp[dpKey]);
+        #ifdef DEBUG
+            t(dpKey, dp[dpKey]);
+        #endif
         return dp[dpKey];
     }
 }
@@ -79,7 +96,9 @@ ll Recurrence::computeLeaf(NiceTreeNode* root, set<int> &forestSet, set<set<int>
 
     // Explicitly check these two conditions, otherwise raise INF 
     // Only terminal
-    t(forestSet, partition);
+    #ifdef DEBUG
+        t(forestSet, partition);
+    #endif
     if(forestSet.size() == 1 && partition.size() == 1 && (*partition.begin() == forestSet)  && *forestSet.begin() == specialTerminal)  {
         return dp[dpKey] = 0;
     }
@@ -101,7 +120,9 @@ ll Recurrence::computeIntroduceVertex(NiceTreeNode* root, set<int> forestSet, se
     // Child node
     NiceTreeNode* childRoot = root -> children.front();
 
-    t(root -> nodeID, childRoot -> nodeID, vertex, dpKey);
+    #ifdef DEBUG
+        t(root -> nodeID, childRoot -> nodeID, vertex, dpKey);
+    #endif
 
     // Check if the vertex is a terminal and if it's in the set or not
 
@@ -117,7 +138,9 @@ ll Recurrence::computeIntroduceVertex(NiceTreeNode* root, set<int> forestSet, se
         if(partition.count(tempAloneSet)) {
             partition.erase(tempAloneSet);
             forestSet.erase(vertex);
-            t("Introduce", childRoot -> nodeID, forestSet, partition);
+            #ifdef DEBUG
+                t("Introduce", childRoot -> nodeID, forestSet, partition);
+            #endif
             return dp[dpKey] = min(dp[dpKey], computeDP(childRoot, forestSet, partition));
         } else { // Vertex not isolated
             return dp[dpKey] = INF;
@@ -156,7 +179,9 @@ ll Recurrence::computeForgetVertex(NiceTreeNode* root, set<int> forestSet, set<s
             tempPartition.erase(block);
             block.insert(vertex);
             tempPartition.insert(block);
-            t(vertex, tempForestSet, tempPartition);
+            #ifdef DEBUG
+                t(vertex, tempForestSet, tempPartition);
+            #endif
             dp[dpKey] = min(computeDP(childRoot, tempForestSet, tempPartition), dp[dpKey]);
             tempPartition.erase(block);
             block.erase(vertex);
@@ -199,8 +224,13 @@ ll Recurrence::computeIntroduceEdge(NiceTreeNode* root, set<int> &forestSet, set
         return dp[dpKey] = computeDP(childRoot, forestSet, partition);
     } else {
         // Don't take the edge (u, v)
+        #ifdef DEBUG
+            t("Going inside no edge");
+        #endif
         dp[dpKey] = min(dp[dpKey], computeDP(childRoot, forestSet, partition));
-        t(dp[dpKey], "Edgeeee");
+        #ifdef DEBUG
+            t(dp[dpKey], "Edgeeee");
+        #endif
 
         // u and v are in the same block stored as tempBlock
         // Delete tempBlock, make partitions by iterating over 2^|tempBlock| - 2 (very imp)
@@ -223,9 +253,14 @@ ll Recurrence::computeIntroduceEdge(NiceTreeNode* root, set<int> &forestSet, set
             partition.insert(blockA);
             partition.insert(blockB);
             ll tempAns = computeDP(childRoot, forestSet, partition);
+            #ifdef DEBUG
+                t("childEdge", forestSet, partition, tempAns);
+            #endif
             dp[dpKey] = min(dp[dpKey], tempAns + edgeWeight[edge]);
 
-            t(dp[dpKey], dpKey);
+            #ifdef DEBUG
+                t(dp[dpKey], dpKey);
+            #endif
             return dp[dpKey];
         }
 
@@ -247,11 +282,15 @@ ll Recurrence::computeIntroduceEdge(NiceTreeNode* root, set<int> &forestSet, set
             tempPartition.insert(blockB);
 
             // Recurse and add weight of edge
-            t(edge, edgeWeight[edge], tempPartition);
+            #ifdef DEBUG
+                t(edge, edgeWeight[edge], tempPartition);
+            #endif
             dp[dpKey] = min(dp[dpKey], computeDP(childRoot, forestSet, tempPartition) + edgeWeight[edge]);
         }
 
-        t(dp[dpKey], dpKey);
+        #ifdef DEBUG
+            t(dp[dpKey], dpKey);
+        #endif
         return dp[dpKey];
     }
 }
@@ -271,10 +310,24 @@ ll Recurrence::computeJoinNode(NiceTreeNode* root, set<int> &forestSet, set<set<
     for(auto pairPart : pairPartitions) {
         set<set<int> > finalPartLeft(pairPart.first.begin(), pairPart.first.end());
         set<set<int> > finalPartRight(pairPart.second.begin(), pairPart.second.end());
-        t("JOIN_IN", partition, finalPartLeft, finalPartRight);
+        #ifdef DEBUG
+            t("JOIN_IN", partition, finalPartLeft, finalPartRight);
+        #endif
 
+        #ifdef DEBUG
+            ll tempDPLeft = computeDP(childLeft, forestSet, finalPartLeft);
+            ll tempDPRight = computeDP(childRight, forestSet, finalPartRight);
+            t("Merging JOIN sols", tempDPLeft, forestSet, finalPartLeft, tempDPRight, finalPartRight);
+            dp[dpKey] = min(dp[dpKey], tempDPLeft + tempDPRight);
+        #endif
         dp[dpKey] = min(computeDP(childLeft, forestSet, finalPartLeft) + computeDP(childRight, forestSet, finalPartRight), dp[dpKey]);
-
+        
+        #ifdef DEBUG
+            tempDPLeft = computeDP(childLeft, forestSet, finalPartRight);
+            tempDPRight = computeDP(childRight, forestSet, finalPartLeft);
+            t("Merging JOIN sols R", tempDPLeft, forestSet, finalPartRight, tempDPRight, finalPartLeft);
+            dp[dpKey] = min(dp[dpKey], tempDPLeft + tempDPRight);
+        #endif
         // DO IT THE OTHER WAY TOOO!
         dp[dpKey] = min(computeDP(childLeft, forestSet, finalPartRight) + computeDP(childRight, forestSet, finalPartLeft), dp[dpKey]);
     }
@@ -309,14 +362,18 @@ bool Recurrence::removeVertexFromPartition(int vertex, set<set<int> > &partition
         }
     }
 
-    t(vertex, partition);
+    #ifdef DEBUG
+        t(vertex, partition);
+    #endif
     if(!eraseSet.empty()) {
         partition.erase(eraseSet);
         eraseSet.erase(vertex);
         if(!eraseSet.empty()) {
             partition.insert(eraseSet);
         }
-        t(partition);
+        #ifdef DEBUG
+            t(partition);
+        #endif
         return true;
     }
 

@@ -15,3 +15,5 @@ s td 1 1 2
 b 1 1 2
 END
 EOF
+
+Answer: 100

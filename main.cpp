@@ -60,7 +60,7 @@ int main() {
     NiceTreeNode::adjNodes = adjNodes;
     NiceTreeNode* root = NiceTreeNode::readInput(numNodes);
 
-    root -> prettyPrintNiceTree();
+    // root -> prettyPrintNiceTree();
 
     // Partition::precomputeMaps(5);
     // Max bag size since we add one terminal node
@@ -71,8 +71,10 @@ int main() {
     Recurrence::terminals = terminals;
     Recurrence::addOneTerminalAllBags(root);
     // t(root -> bag);
-    t(Recurrence::specialTerminal, Recurrence::terminals);
-    cout << Recurrence::calculateDP(root) << endl;
+    // t(Recurrence::specialTerminal, Recurrence::terminals);
+    ll ans = Recurrence::calculateDP(root);
+    cerr << ans << endl;
+    cout << ans << endl;
     return 0;
 }
 

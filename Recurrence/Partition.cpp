@@ -189,7 +189,7 @@ void Partition::getMergedPairMap(vector<vector<set<int> > > &partitionMap,
     for(int i = 0; i < partitionMap.size(); i++) {
         cout << "i: " << i << endl;
         int partitionIndexI = inversePartitionMap[partitionMap[i]];
-        for(int j = i+1; j < partitionMap.size(); j++) {
+        for(int j = i; j < partitionMap.size(); j++) {
             int partitionIndexJ = inversePartitionMap[partitionMap[j]];
             vector<set<int> > finalMergedSet;
             if(checkMerge(partitionMap[i], partitionMap[j], finalMergedSet, n)) {
@@ -312,7 +312,7 @@ map<int, vector<pair<int, int> > > Partition::partitionPairMap;
 1
 2
 4
-30
+30 {{0, 1, 2, 3}, {4}}  {{0, 1, 2, 3, 4}}
 4
 1
 2
@@ -336,4 +336,11 @@ map<int, vector<pair<int, int> > > Partition::partitionPairMap;
 ([{0}, {1}, {2}], [{0, 2}, {1}]) 
 ------
 
+5 -> 15
+8 -> 4140
+
+{{0}, {1, 2}} {{0, 1} {2}} -> {{0, 1, 2}}
+{{0, 1} {2}} {{0, 1, 2}}
+
+{{0, 1, 2}} -> ({{0}, {1, 2}} {{0, 1} {2}})
 */

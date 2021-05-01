@@ -21,3 +21,4 @@ END
 EOF
 
 // C3
+// Answer: 20
