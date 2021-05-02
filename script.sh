@@ -1,4 +1,4 @@
-for i in {001..200}; 
+for i in {007..014}; 
 do
   echo "Testing $i";
   time ./main < Instances/instance$i.gr 2> Logs/instance$i.out

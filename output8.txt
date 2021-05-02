@@ -1,1 +1,0 @@
-Recurrence::specialTerminal : 1 Recurrence::terminals : {1, 2, 3, 5, 6}

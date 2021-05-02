@@ -24,6 +24,9 @@ class Partition {
     map<vector<set<int> >, int > &inversePartitionMap, 
     map<int, vector<pair<int, int> > >&finalMap, int n);
     static void recur(vector<vector<vector<set<int> > > >&allPartitions, int i, int n);
+
+    static void addPartitionPairMapToFile();
+    static void readPartitionPairMapFromFile();
 };
 
 #endif

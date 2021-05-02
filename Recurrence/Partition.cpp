@@ -255,6 +255,40 @@ vector<pair<vector<set<int> >,vector< set<int> > > > Partition::permutationMappe
     return finalPairPartition;
 }
 
+void Partition::addPartitionPairMapToFile() {
+    // Print mapSize
+    // For each key, add each pair
+
+    fstream magicFile;
+    magicFile.open("magicFile.txt", ios::out);
+    cout << "Writing..." << endl;
+    magicFile << partitionPairMap.size() << "\n";
+    for(auto it : partitionPairMap) {
+        magicFile << it.first << " " << it.second.size() << "\n";
+        for(auto pair : it.second) {
+            magicFile << pair.first << " " << pair.second << "\n";
+        }
+    }
+    magicFile.close();
+}
+
+void Partition::readPartitionPairMapFromFile() {
+    fstream magicFile;
+    magicFile.open("magicFile.txt", ios::in);
+    int mapSize;
+    magicFile >> mapSize;
+    while(mapSize--) {
+        int key, pairListSize;
+        magicFile >> key >> pairListSize;
+        while(pairListSize--) {
+            int u, v;
+            magicFile >> u >> v;
+            partitionPairMap[key].push_back(make_pair(u, v));
+        }
+    }
+    magicFile.close();
+ }
+
 
 void Partition::precomputeMaps(int n) {
     vector<vector<vector<set<int> > > >partitionMaps;
@@ -271,13 +305,16 @@ void Partition::precomputeMaps(int n) {
             allPartitions.push_back(partition);
             inversePartitionMap[partition] = partitionIndex++;
         }
-        // for(auto it : partitionMap) t(it);
-        // t(partitionMap.size());
         
-        getMergedPairMap(partitionMap, inversePartitionMap, partitionPairMap, nodeCount);
+        // getMergedPairMap(partitionMap, inversePartitionMap, partitionPairMap, nodeCount);
         nodeCount++;
     }
 
+    // Put it into a file
+    // addPartitionPairMapToFile();
+
+    // Read from file
+    readPartitionPairMapFromFile();
     cout << "Partition precompute(): Created Partition Map" << endl;
     // prettyPrintMap();
 }
