@@ -306,15 +306,15 @@ void Partition::precomputeMaps(int n) {
             inversePartitionMap[partition] = partitionIndex++;
         }
         
-        // getMergedPairMap(partitionMap, inversePartitionMap, partitionPairMap, nodeCount);
+        getMergedPairMap(partitionMap, inversePartitionMap, partitionPairMap, nodeCount);
         nodeCount++;
     }
 
     // Put it into a file
-    // addPartitionPairMapToFile();
+    addPartitionPairMapToFile();
 
     // Read from file
-    readPartitionPairMapFromFile();
+    // readPartitionPairMapFromFile();
     cout << "Partition precompute(): Created Partition Map" << endl;
     // prettyPrintMap();
 }
