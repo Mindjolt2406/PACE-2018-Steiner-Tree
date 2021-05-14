@@ -303,6 +303,20 @@ bool NiceTreeNode::isLeaf() {
     return (this -> bag.size() == 1);
 }
 
+ll NiceTreeNode::computeNumJoinNodes() {
+    ll numJoinNodes = 0;
+    if(this -> niceNodeType == NiceNodeType::JOIN) {
+        ll k = this -> bag.size();
+        numJoinNodes += pow(k, k);
+        // numJoinNodes+= this -> bag.size();
+    }
+    for(auto childNode : this -> children) {
+        numJoinNodes += childNode -> computeNumJoinNodes();
+    }
+
+    return numJoinNodes;
+}
+
 ostream& operator <<(ostream &os, NiceTreeNode* root) {
     os << "(" << (int)root -> nodeID << ", " << NiceTreeNode::niceNodeTypeArr[(int) root -> niceNodeType] << ")";
     return os;

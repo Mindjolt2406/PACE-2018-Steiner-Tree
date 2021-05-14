@@ -81,6 +81,8 @@ class NiceTreeNode {
 
     bool isLeaf();
 
+    ll computeNumJoinNodes();
+
     static NiceTreeNode* readInput(int numNodes);
 
     static void dfsNodes(int currNode, int parentNode, vector<vector<int> > &adj, vector<NiceTreeNode*> &niceTreeNodes);

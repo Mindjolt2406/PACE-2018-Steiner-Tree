@@ -1,0 +1,16 @@
+%!TeX root=main.tex
+\begin{section}{Introduction}
+	\begin{subsection}{Intro}
+	The Steiner Tree Problem in an NP-Complete Problem. It's a generalization of two polynomially solvable problem - shortest path and the minimum spanning tree. The problem is defined as follows. Given a weighted undirected graph $G$, and $T \subseteq V$, we would like to find a sub-graph of $G$ which is a tree and spans all vertices in $T$. \\
+	
+	It reduces to the shortest path problem on graphs if $|T|=2$ and to the minimum spanning tree if $|T|=|V|$. \\
+	
+	This problem is a PACE 2018 Challenge problem. 
+	\end{subsection}
+
+	\begin{subsection}{Our work}
+		We implemented algorithms of both tracks involving exact algorithms - Track 1 and Track 2. Track 1 had test cases with a low number of terminals. Track 2 on the other hand had test cases with arbitrarily high number of terminals (3k) but graphs with low treewidth. \\
+		
+		The Track 1 algorithm was an $\mathcal{O}*(3^k)$ algorithm, where $k$ is the number of terminals. Our Track 2 algorithm is a DP over Treewidth algorithm which takes $\mathcal{O}^*(k^{O(k)})$ time. 
+	\end{subsection}
+\end{section}

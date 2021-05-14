@@ -1,0 +1,36 @@
+%!TeX root=main.tex
+\begin{section}{Nice Tree Decomposition}
+	\label{section:NTD}
+	In this section, we'll go over how we converted a tree decomposition into a nice tree decomposition. 
+	
+	\input{NTDFigures.tex}
+	
+	The idea that we keep the nodes which are in the tree decomposition as is, and insert new nodes in between the older nodes in order to ``smoothen" the change from one node to another. 
+	
+	\begin{subsection}{Join Nodes}
+			If a node has multiple children ($c$), we have to create join nodes. An easy way to do so is to duplicate the current node, add those two duplicates as children to the current node and then assign the first child to the left duplicated node. Now, we have $c-1$ children left, and we recurse on the right duplicated child. The current node is a join node. \\
+			
+			This procedure increases the height of the tree by $c$ if the original node had $c$ children. This is because we keep adding vertices only to the right. However, it doesn't matter as the algorithm does not depend on the depth. However if we did, we could minimise the height by making the binary tree of joined nodes balanced. \\
+			
+			We can refer to the example in Fig. \ref{TreeDecomp} where the node $\{2, 3\}$ has been duplicated as shown in Fig. \ref{NiceTreeDecomposition}. To make the tree nice w.r.t the duplicated node and its child, we'll go to the next subsection .
+	\end{subsection}
+
+	\begin{subsection}{Introduce and Forget Nodes}
+		At this point, any node which has child with a different bag of vertices has only one child. By making the transition for that nice, we end up making the entire tree nice. \\
+		
+		Given nodes $X$ and $Y$, where $Y$ is the only child of $X$, we want to insert nodes between $X$ and $Y$ such that there is a nice path from $Y$ to $X$ as we go up the tree. \\
+		
+		To compute this, while going from $Y \rightarrow X$, we should add forget nodes for all vertices in $Y \backslash X$ and then add introduce nodes for all vertices in $X \backslash Y$. Note that this order is important. If we reverse the order, we can potentially increase the treewidth. \\ 
+		
+		This has been done in Fig. \ref{NiceTreeDecomposition} where we go from $\{3, 4\} \rightarrow \{2, 3\}$ in this manner. 
+	\end{subsection}
+
+	\begin{subsection}{Introduce Edge Nodes}
+		After applying the above steps, we get a nice tree decomposition which adds and forgets vertices one by one. If we would like to add edges one by one as well, 
+		Given an edge containing two vertices $u$ and $v$, let $f(u)$ and $f(v)$ denote the nodes where $u$ and $v$ are forgotten. Let $T_u$ and $T_v$ denote the subtrees of the tree decomposition rooted at $f(u)$ and $f(v)$ respectively. Now, it's easy to see that either $T_u \subset T_v$ or $T_v \subset T_u$ where $\subset$ denotes the ``subtree" property. If it isn't, then there is no node in common between $T_u$ and $T_v$ and that contradicts the property that there exists a bag containing $u$ and $v$ if there is an edge $(u, v)$ in the graph. 
+		
+		In such a scenario, without loss of generality, assume $T_v \subset T_u$. Then, we add an Introduce Edge node just before $v$ is forgotten, i.e. as a child of $f(v)$. This ensures that the graph isn't joined and the edge is only introduced once.  
+	\end{subsection}
+\end{section}
+
+

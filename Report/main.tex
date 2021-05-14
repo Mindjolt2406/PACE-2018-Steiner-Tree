@@ -1,0 +1,94 @@
+\documentclass[letterpaper,12pt]{article}
+\usepackage{tabularx} % extra features for tabular environment
+\usepackage{amsmath}  % improve math presentation
+\usepackage{amssymb}
+\usepackage{graphicx} % takes care of graphic including machinery
+\usepackage[margin=1in,letterpaper]{geometry} % decreases margins
+\usepackage{cite} % takes care of citations
+\usepackage[final]{hyperref} % adds hyper links inside the generated pdf file
+\usepackage{caption}
+\usepackage{subcaption}
+
+\hypersetup{
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=black,        % color of internal links
+	citecolor=blue,        % color of links to bibliography
+	filecolor=magenta,     % color of file links
+	urlcolor=blue         
+}
+\usepackage{blindtext}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{gensymb}
+\usepackage{amsthm}
+\usepackage{listings}
+%\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage[ruled,vlined]{algorithm2e}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem*{cor}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{conj}{Conjecture}[section]
+\newtheorem{exmp}{Example}[section]
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+
+\usepackage{tikz}
+\usetikzlibrary{fadings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{shapes}
+\newcommand{\Pa}{\ensuremath{\mathcal{P}}}
+
+%++++++++++++++++++++++++++++++++++++++++
+
+
+\begin{document}
+	
+	\title{Steiner Tree - DP Over Treewidth}
+	\author{Aditya Sheth - IMT201800x \\ Rathin Bhargava - IMT2017522}
+	\date{\today}
+	\maketitle
+	\tableofcontents
+	\newpage
+
+%    \begin{section}{Introduction}
+%    
+%    \end{section}
+  
+  \input{Introduction.tex}
+    
+   \input{NTD.tex}
+    
+    \input{Overview.tex}
+    
+    \input{Partition.tex}
+    
+    \begin{section}{Implementation}
+    
+    \end{section}
+    
+    \begin{section}{DP with low terminals (Track 1)}
+    
+    \end{section}
+    
+    \input{Observation.tex}
+    
+    \begin{section}{Conclusions}
+        
+    \end{section}
+    
+	\bibliographystyle{unsrt}
+	\bibliography{biblio}
+	
+	
+\end{document}
+

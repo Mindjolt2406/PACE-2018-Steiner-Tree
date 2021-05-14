@@ -1,0 +1,70 @@
+%!TeX root=main.tex
+
+\begin{section}{Algorithm Overview}
+	In this section, we describe the DP over Treewidth algorithm in detail along with any implementation details or edge cases we had to explicitly take care of. 
+	
+	As defined by the nice tree decomposition, we have $4$ types of nodes as described above in Section \ref{section:NTD}. For each node, we've described the recurrence below. \\
+	
+	We add a terminal $u^*$ to all bags, which leads to an increase of the bag size by 1. This is done so that any solution for node $t$ we construct always has the invariant that it is covering the terminals for the sub graph corresponding to the subtree rooted at $X_t$. Otherwise, till the time we introduce our first terminal, we would've seen a portion of the graph already. Inserting a terminal node would mean that we check all possible forests to see if they can be extended to this terminal node. This is a very high number of possibilities (even though it's asymptotically the same). By adding that one node in the beginning, we prune off all these possibilities. \\
+	
+	We have implemented this algorithm in a top down fashion so that we only go to the required states and don't enumerate each and every possible state. Top down approaches prune the search tree and tend to be more efficient. At each step we memoise the solution. \\
+	
+	\begin{subsection}{Leaf Node}
+		Since every bag has size one, there are two options for $X$. Either $X=\{u^*\}$ or $X= \emptyset$. Hence, we have two possible reachable DP states. $dp[t, \{u^*\}, \{\{u^*\}\}] = 0$ and $dp[t, \emptyset, \emptyset] = INF$. We can't build a solution from the second case since we don't uphold the invariant that the forest spans all the terminals introduced in the subtree of the node. 
+	\end{subsection}
+
+	\begin{subsection}{Introduce Vertex Node}
+		While introducing a vertex $v$ without it's edges, we have two possibilities. If $v \in X$, then the partition should have a new block containing a single vertex $v$. This adds a new component to the forest. In this case, we recurse to the state where $v$ is not contained in $X$ and the block $\{v\}$ is not contained in $\Pa$ and recurse on that state. Otherwise, we ignore the vertex and recurse. Note that if $v$ is a terminal then $v$ has to be in $X$, otherwise it's impossible and we return $INF$. Also, if $v = u^*$, we just simply recurse to the child with the same $X$ and $\Pa$. This is because $u^*$ had already been introduced initially in every leaf node. We shouldn't introduce it again. 
+		
+		$$dp[t, X, \Pa] = 
+		\begin{cases}
+			dp[t', X \backslash \{v\}, \Pa \backslash \{\{v\}\}] & v \in X \\
+			dp[t', X, \Pa] & \text{else}
+		\end{cases}$$
+		
+	\end{subsection}
+
+	\begin{subsection}{Forget Vertex Node}
+		When we forget vertex $v$, we forget all it's edges as well. We have two possibilities here. If $v$ is not in the child solution, then we don't need to do anything. We just recurse to the child with the same $X$ and $\Pa$. We do the same if $v = u^*$ as $u^*$ can only be forgotten at the root. 
+		
+		If $v$ is in some child solution, then we have a variety of child states to get our answer from. Formally we check all states which include $v$ in their solution i.e. $X \cup \{v\}$. However, there can be a lot of partitions. We can generate all the child partitions by simply adding $v$ to a block in $\Pa$. Essentially, if we had $b$ blocks in $\Pa$ we are generating $b$ new partitions $\Pa'$ and recursing on them. Note that we cannot create a new block for $v$ as by doing so, we wouldn't ensure that the tree is a single connected component. 
+		
+		$$dp[t, X, \Pa] = 
+		\min \{
+			\min\limits_{\Pa'} dp[t', X, \Pa], dp[t', X \cup \{v\}, \Pa'] \}$$
+	\end{subsection}
+
+
+	\begin{subsection}{Introduce Edge Node}
+		We add an edge $(u, v)$ in this node. If $u \notin X$ or $v \notin X$, then there's no point in adding the edge $(u, v)$ to our solution. Also, if this is not the case, but $u$ and $v$ are in different blocks in $\Pa$, then we don't add this edge either and just recurse to the child with $X$ and $\Pa$. 
+		
+		However, if there is a block i $\Pa$ such that $u$ and $v$ are a part of it, then we need to find suitable partitions to recurse on for the child node. Note that $X$ stays the same for the child. Let the block be $b$. Now, we need to generate partitions such that after adding the edge $(u, v)$, we get $\Pa$. All blocks except $b$ are unaffected. We can split $b$ by making two blocks, one with $u$ and the other with $v$. Now each of the other $|b|-2$ other vertices have two choices. Hence, we can generate $2^{|b|-2}$ new partitions $\Pa'$. 
+		
+		$$dp[t, X, \Pa] = \min\{\min\limits_{\Pa'}dp[t', X, \Pa'] + w(u, v), dp[t', X, \Pa]\} $$
+	\end{subsection}
+
+	\begin{subsection}{Join Node}
+		In join nodes, $X_t = X_{t_1} = X_{t_2}$. The only change is in the partition $\Pa$. Now, we want to combine all partitions $\Pa_1$ and $\Pa_2$ such that while merging the forests from their respective solutions, we get a forest in the current solution. The only way this can happen is if no cycles are formed in this process. While we can add cycles and show that the minimum will always be a forest, by ensuring the pairs we compute the DP for merge to form a forest, we are pruning out all the cyclic merges which further optimises the solution. 
+		
+		The merge of two partitions $\Pa_1$ and $\Pa_2$ are said to be acyclic if $\forall u, v \in X, \nexists b_1 \in \Pa_1, b_2 \in \Pa_2$ such that $u \in b_1$ and $v \in b_1$ and $u \in b_2$ and $v \in b_2$. This is because if $\exists b \in \Pa$ where $u \in b$ and $v \in b$, then it implies that they are connected indirectly via a path in $G_t$. This is because the only time we merge two blocks into one is in introduce edge node. 
+		
+		In this case, that would imply that there is a path from $u$ to $v$ in $G_{t_1}$ and in $G_{t_2}$ which forms a cycle when the two forests are merged into $G_t$. 
+		
+		The calculation of such pairs for each partition has been described below in Section \ref{section:Partition}. This generates all partitions for vertices in the range $[0 \dots n]$. For example, the pairs of the partition is $\{\{0\}, \{1, 2\}\} \rightarrow (\{\{0\}, \{1, 2\}\}, \{\{0\}, \{1\}, \{2\}\})$. Now if the set $X = \{1, 3, 4\}$, then the pairs for the partition $\{\{1\}, \{3, 4\}\} \rightarrow  (\{\{1\}, \{3, 4\}\}, \{\{1\}, \{3\}, \{4\}\})$ can just be mapped from the earlier case since the structure of the partition is the same. 
+		
+		$$dp[t, X, \Pa] = \min\limits_{\Pa_1, \Pa_2} \{dp[t', X, \Pa_1] + dp[t', X, \Pa_2] \}$$
+	\end{subsection}
+
+	\begin{subsection}{Weird Nodes}
+		Since the tree decompositions given in the input weren't the most optimal, there were times when the bags were repeated. As in, the contents of two bags in the tree decomposition were the same and they were connected by edges. Ideally, we would like to merge them, but that would've greatly altered the nice tree decomposition algorithm explained in Section \ref*{section:NTD}. This is because such a node couldn't be classified into the 4 regular nodes since there's no chance in the bag. Hence, we decided to keep them as is, make join nodes if necessary and just simply call the recurrence for the child. 
+		
+		$$dp[t, X, \Pa] = dp[t', X, \Pa]$$
+	\end{subsection}
+
+	\begin{subsection}{Running Time Analysis}
+		If the treewidth is $k$, then the bag size is $k+2$ (We added one terminal node to each bag). The total work done in each (non-join) node is $O(k^k * 2 ^ k * nlogn)$. In each join node however, $k^{2k}$ because we are recursing over all pairs whose acyclic merge forms the node. The total time complexity is $O(k^{O(k)})$. However, in practice it's a little better since $k=6$ worked under 5 minutes. If we do calculate $8^16$ (taking $k+2$), that's over 1e14 instructions which would take over a day to compute. 
+		
+		The $k^k$ for the join node is actually $B(n)$ which is the $n^{th}$ Bell number. Hence, the bound for each join node cannot be more than $B(k+2)^2$. Asymptotically however, the time complexity is the same. 
+	\end{subsection}
+
+\end{section}

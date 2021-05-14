@@ -1,0 +1,33 @@
+%!TeX root=main.tex
+\begin{section}{Generating Partition Pairs for Join Node}
+	\label{section:Partition}
+	In the DP recurrence for join node, given a partition $\Pa$, we need to find all pairs of partitions $\Pa_1$ and $\Pa_2$ such that the acyclic merge of $\Pa_1$ and $\Pa_2$ form $\Pa$. 
+	
+	\begin{subsection}{Generating Partitions}
+		We can generate partitions recursively. Let $\Pa_n$ denote the set of all partitions of $n$ numbers. Each partition is made up of \textit{blocks}. A set of mutually disjoint blocks which collectively exhausts $n$ numbers forms a partition. \\
+		
+		To generate $\Pa_n$, we can do so recursively by first generating $\Pa_{n-1}$. Now, for each partition $p \in \Pa_{n-1}$, for each block $b \in p$, we append $\{n\}$ to that block and call the resulting partition a new partition. Lastly, we make a block from $\{n\}$ add add that to the partition $p$. Hence, if $p$ has $c$ blocks, we would've created $c+1$ new partitions from it. \\
+		
+		For example, consider $\{\{0, 1\}, \{2\}\} \in \Pa_2$. Now, from this partition, we can create 3 more partitions after adding the number 3. They are - $\{\{0, 1, 3\}, \{2\}\},\ \{\{0, 1\}, \{2, 3\}\}$ and $\{\{0, 1\}, \{2\}, \{3\}\}$. \\
+		
+		This process takes $O(B(n))$ where $B(n)$ is the $n^{th}$ bell number. Practically, we were able to generate partitions up to 12 in less than 5 minutes. 
+	\end{subsection}
+
+	Now, we go over all pairs of the partitions formed above. For each pair, we would like to see if an acyclic merge is possible, and if it is then what partition is the result of the merge. By keeping a record of the pair of partitions and the merged partition, we can build a map when given a partition, we return the list of pairs of partitions which when merged form the given partition. \\
+	
+	This is really useful because instead of enumerating over all possible ways of getting pairs $p_1$ and $p_2$ for a partition $p$ in a join node, we can just look up this table and recurse to the correct states without wasting computation time to check if the partitions formed are legitimate or not. \\
+	
+	\begin{subsection}{Acyclic Merge}
+		Given two partitions $p_1$ and $p_2$, we need to check if their merge is acyclic and then actually merge the two partitions. Recall that a block in a partition represents a connected component. Hence, if two vertices belong to the same connected component in $p_1$ and $p_2$, after the merge we will form a cycle. \\
+		
+		To prevent this, we could simply enumerate over all possible pairs of vertices and check if they belong to the same block in both the partitions or not. This takes $O(k^2)$ where $k-1$ is the treewidth of the graph. We could optimise this further to $O(k*\alpha(k))$ by using the DSU data structure. \\
+		
+		The idea is that we could think of $p_1$ as a graph where each block is a connected component and add that to the data structure. This can be done in Now, for each block in $p_2$ all the vertices have to belong to different components. If not, by merging the two partitions, we create a cycle. This check can be done in $O(b * \alpha(b))$ time overall, where $b$ is the size of the block. Summing over all blocks, we can do this in $O(k * \alpha(k))$. Hence, the overall time taken is $O(k * \alpha(k))$. \\
+		
+		Finally, if the above conditions are satisfied and the two partitions can be merged, we can treat $p_2$ as a graph where each block is a connected component and accordingly add the edges to the DSU. Since $p_1$ is already added, all vertices connected in the DSU form a new block. Let's see an example. \\
+		
+		We want to merge partitions $\{\{0, 1\}, \{2\}\}$ and $\{\{0\}, \{1, 2\}\}$. Now, note that their merge is acyclic. When we add $p_1$ to the DSU initially, 0 and 1 form one component while 2 forms its own second component. Now, when we add $p_2$, since 1 and 2 are connected in $p_2$, once we add that edge, 2 gets connected to 1 resulting in one single block $\{\{0, 1, 2\}\}$ which is the result of merging our partition. 
+	\end{subsection}
+
+	Since we are checking this merge condition for every pair of vertices, this entire procedure of generating pairs takes $O(B(k)^2 * k * \alpha(k))$. Practically, we could run it for $k \leq 8$ under 5 minutes. 
+\end{section}
